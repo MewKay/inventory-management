@@ -31,7 +31,7 @@ const productsGet = async (req, res) => {
     pagination.offset,
   );
 
-  res.render("productTable", {
+  res.render("productList", {
     products: products,
     pagination: pagination,
     nameDirection: getColumnDirection("name", sort, direction),
