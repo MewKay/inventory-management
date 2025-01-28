@@ -1,0 +1,25 @@
+<table>
+  <caption>
+    Products List
+  </caption>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Price(per unit)</th>
+      <th>Category</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% products.forEach((product) => { %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= `${product.quantity} ${product.unit}` %></td>
+        <td>$<%= product.price %></td>
+        <td><%= product.category %></td>
+        <td><a href="/view/products/<%= product.id %>">. . .</a></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
