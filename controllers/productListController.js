@@ -1,4 +1,5 @@
-const { getAllProducts } = require("../db/queries");
+const { getAllProducts, getTotalProductsCount } = require("../db/queries");
+const { createPagination } = require("../utils/pagination");
 
 const getColumnDirection = function getColumnDirectionIfSortedBy(
   columnName,
@@ -20,10 +21,19 @@ const getColumnDirection = function getColumnDirectionIfSortedBy(
 
 const productsGet = async (req, res) => {
   const { sort, direction } = req.query;
-  const products = await getAllProducts(sort, direction);
+  const totalProducts = await getTotalProductsCount();
+  const pagination = createPagination(req.query, totalProducts);
+
+  const products = await getAllProducts(
+    sort,
+    direction,
+    pagination.productsPerPage,
+    pagination.offset,
+  );
 
   res.render("productTable", {
     products: products,
+    pagination: pagination,
     nameDirection: getColumnDirection("name", sort, direction),
     quantityDirection: getColumnDirection("quantity", sort, direction),
     priceDirection: getColumnDirection("price", sort, direction),

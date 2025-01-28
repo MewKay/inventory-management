@@ -3,6 +3,8 @@ const pool = require("./pool");
 const getAllProducts = async function queryAllProductsDataFromDB(
   sort,
   direction = "ASC",
+  productsPerPage,
+  offset,
 ) {
   // Escape parameters before entering query
   const validParameters = ["name", "quantity", "price", "category"];
@@ -19,14 +21,27 @@ const getAllProducts = async function queryAllProductsDataFromDB(
     FROM product p
     INNER JOIN category c 
       ON p.category_id = c.id
-    ORDER BY ${columnToSortBy} ${sortDirection};
+    ORDER BY ${columnToSortBy} ${sortDirection}
+    LIMIT $1 OFFSET $2;
     `;
+  const values = [productsPerPage, offset];
 
-  const { rows } = await pool.query(query);
+  const { rows } = await pool.query(query, values);
 
   return rows;
 };
 
+const getTotalProductsCount = async function queryTotalProductsCountFromDB() {
+  const query = `
+    SELECT COUNT(*)
+    FROM product;
+  `;
+
+  const { rows } = await pool.query(query);
+  return rows[0].count;
+};
+
 module.exports = {
   getAllProducts,
+  getTotalProductsCount,
 };
