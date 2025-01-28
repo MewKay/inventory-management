@@ -5,23 +5,43 @@
   <thead>
     <tr>
       <th>
-        <a href="?sort=name">
+        <a href="?sort=name&direction=<%= nameDirection ? nameDirection : "asc" %>">
           Name
+          <%= 
+            nameDirection === "asc" 
+              ? "⬇" : nameDirection === "desc" 
+              ? "⬆" : nameDirection
+          %>
         </a>
       </th>
       <th>
-        <a href="?sort=quantity">
+        <a href="?sort=quantity&direction=<%= quantityDirection ? quantityDirection : "asc" %>">
           Quantity
+          <%= 
+           quantityDirection === "asc" 
+              ? "⬇" : quantityDirection === "desc" 
+              ? "⬆" : quantityDirection
+          %>
         </a>
       </th>
       <th>
-        <a href="?sort=price">
-            Price(per unit)
+        <a href="?sort=price&direction=<%= priceDirection ? priceDirection : "asc" %>">
+          Price(per unit)
+          <%= 
+            priceDirection === "asc" 
+              ? "⬇" : priceDirection === "desc" 
+              ? "⬆" : priceDirection
+          %>
         </a>
       </th>
       <th>
-        <a href="?sort=category">
+        <a href="?sort=category&direction=<%= categoryDirection ? categoryDirection : "asc" %>">
           Category
+          <%= 
+            categoryDirection === "asc" 
+              ? "⬇" : categoryDirection === "desc" 
+              ? "⬆" : categoryDirection
+          %>
         </a>
       </th>
       <th>Details</th>
