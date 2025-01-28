@@ -1,8 +1,9 @@
 const { getAllProducts } = require("../db/queries");
 
 const productsGet = async (req, res) => {
-  const products = await getAllProducts();
-  res.render("productList", { products: products });
+  const { sort } = req.query;
+  const products = await getAllProducts(sort);
+  res.render("productTable", { products: products });
 };
 
 module.exports = { productsGet };
