@@ -1,10 +1,8 @@
 const { Router } = require("express");
+const productDetailsController = require("../controllers/productDetailsController");
 
 const productDetailsRouter = Router({ mergeParams: true });
 
-productDetailsRouter.get("/", (req, res) => {
-  const productId = parseInt(req.params.productId);
-  res.render("productDetails", { productId: productId });
-});
+productDetailsRouter.get("/", productDetailsController.productGet);
 
 module.exports = productDetailsRouter;
