@@ -4,15 +4,15 @@ const { Client } = require("pg");
 const query = `
   CREATE TABLE IF NOT EXISTS category(
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255)
+    name VARCHAR(255) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS product(
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255),
-    quantity INTEGER,
-    unit VARCHAR(50),
-    price DECIMAL(10,2),
+    name VARCHAR(255) NOT NULL,
+    quantity INTEGER NOT NULL,
+    unit VARCHAR(50) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
     category_id INTEGER REFERENCES category(id)
   );
 
@@ -85,7 +85,13 @@ const query = `
     ('Frozen Pizza', 8, 30, 'each', 6.99),
     ('Ice Cream', 8, 45, 'liter', 4.99),
     ('Frozen Berries', 8, 25, 'kg', 3.75),
-    ('Frozen Peas', 8, 40, 'kg', 1.99);
+    ('Frozen Peas', 8, 40, 'kg', 1.99),
+
+    ('Uncategorized Apples', NULL, 50, 'lbs', 1.99),
+    ('Orphaned Widget', NULL, 100, 'pieces', 5.99),
+    ('Mystery Tool', NULL, 20, 'units', 12.99),
+    ('Generic Screwdriver', NULL, 75, 'units', 3.99),
+    ('No-Category Flashlight', NULL, 30, 'pieces', 8.99);
 `;
 
 //Url can be passed as the first argument of the script
