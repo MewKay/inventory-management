@@ -17,9 +17,13 @@ const getAllProducts = async function queryAllProductsDataFromDB(
     : "ASC";
 
   const query = `
-    SELECT p.id, p.name, quantity, unit, price, c.name AS category
+    SELECT p.id, p.name, quantity, unit, price,
+    CASE 
+      WHEN c.name IS NULL THEN 'Uncategorized'
+      ELSE c.name
+    END AS category
     FROM product p
-    INNER JOIN category c 
+    LEFT JOIN category c 
       ON p.category_id = c.id
     ORDER BY ${columnToSortBy} ${sortDirection}
     LIMIT $1 OFFSET $2;
