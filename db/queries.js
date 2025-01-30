@@ -1,20 +1,16 @@
+const { validateTableQueryParams } = require("../utils/db");
 const pool = require("./pool");
 
 const getAllProducts = async function queryAllProductsDataFromDB(
   sort,
-  direction = "ASC",
+  direction,
   productsPerPage,
   offset,
 ) {
-  // Escape parameters before entering query
-  const validParameters = ["name", "quantity", "price", "category"];
-  const columnToSortBy = validParameters.includes(sort) ? sort : "id";
-
-  const validDirections = ["ASC", "DESC"];
-  const upperCasedDirection = direction.toUpperCase();
-  const sortDirection = validDirections.includes(upperCasedDirection)
-    ? upperCasedDirection
-    : "ASC";
+  const { columnToSortBy, sortDirection } = validateTableQueryParams(
+    sort,
+    direction,
+  );
 
   const query = `
     SELECT p.id, p.name, quantity, unit, price,
