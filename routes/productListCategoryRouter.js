@@ -1,9 +1,8 @@
 const { Router } = require("express");
+const controller = require("../controllers/productListCategoryController");
 
-const productListCategoryRouter = Router();
+const productListCategoryRouter = Router({ mergeParams: true });
 
-productListCategoryRouter.get("/", (req, res) => {
-  res.render("productListCategory");
-});
+productListCategoryRouter.get("/", controller.productsPerCategoryGet);
 
 module.exports = productListCategoryRouter;

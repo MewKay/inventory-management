@@ -10,7 +10,7 @@ const productListRouter = require("./routes/productListRouter");
 const productListCategoryRouter = require("./routes/productListCategoryRouter");
 app.use("/", indexRouter);
 app.use("/view/products", productListRouter);
-app.use("/view/category", productListCategoryRouter);
+app.use("/view/category/:categoryId", productListCategoryRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

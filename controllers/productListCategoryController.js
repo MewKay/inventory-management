@@ -1,20 +1,21 @@
-const { getAllProducts, getTotalProductsCount } = require("../db/queries");
+const { getAllProductsByCategory } = require("../db/queries");
 const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
 const { createPagination } = require("../utils/pagination");
 
-const productsGet = async (req, res) => {
+const productsPerCategoryGet = async (req, res) => {
+  const { categoryId } = req.params;
   const { sort, direction } = req.query;
-  const totalProducts = await getTotalProductsCount();
-  const pagination = createPagination(req.query, totalProducts);
+  const pagination = createPagination(req.query, 10); // TODO: Change 10 to the totalProducts inside a category
 
-  const products = await getAllProducts(
+  const products = await getAllProductsByCategory(
+    categoryId,
     sort,
     direction,
     pagination.productsPerPage,
     pagination.offset,
   );
 
-  res.render("productList", {
+  res.render("productListCategory", {
     products: products,
     pagination: pagination,
     nameDirection: getCurrentColumnDirection("name", sort, direction),
@@ -24,4 +25,4 @@ const productsGet = async (req, res) => {
   });
 };
 
-module.exports = { productsGet };
+module.exports = { productsPerCategoryGet };
