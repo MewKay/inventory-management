@@ -69,9 +69,25 @@ const getAllProductsByCategory =
     return rows;
   };
 
+const getTotalProductsCountByCategory =
+  async function queryTotalProductsCountWithCategoryIdFromDB(categoryId) {
+    const query = `
+      SELECT COUNT(*)
+      FROM product p
+      INNER JOIN category c 
+        ON p.category_id = c.id
+      WHERE c.id = $1;
+    `;
+    const values = [categoryId];
+
+    const { rows } = await pool.query(query, values);
+    return rows[0].count;
+  };
+
 module.exports = {
   getAllProducts,
   getAllCategories,
   getAllProductsByCategory,
   getTotalProductsCount,
+  getTotalProductsCountByCategory,
 };
