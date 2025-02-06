@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grocery Inventory</title>
+  </head>
+  <body>
+    <main>
+      <div class="category-list-container">
+        <div class="category-select">
+          Show category :
+          <ul>
+            <button
+              class="select-expand"
+              aria-label="Select products' category to display"
+            >
+              <%= products[0].category %> 
+            </button>
+            <% categories.forEach((category) => { %>
+              <li>
+                <a href="<%= category.id %>">
+                  <%= category.name %>
+                </a>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+        <%- include("partials/productTable.ejs", { 
+          products, 
+          pagination, 
+          nameDirection, 
+          quantityDirection, 
+          priceDirection, 
+          categoryDirection
+        }) %>
+      </div>
+    </main>
+  </body>
+</html>
