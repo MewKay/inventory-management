@@ -1,4 +1,4 @@
-const { getAllProductsByCategory } = require("../db/queries");
+const { getAllProductsByCategory, getAllCategories } = require("../db/queries");
 const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
 const { createPagination } = require("../utils/pagination");
 const validateTableQueryParams = require("../utils/validateTableQueryParams");
@@ -19,8 +19,11 @@ const productsPerCategoryGet = async (req, res) => {
     pagination.offset,
   );
 
+  const categories = await getAllCategories();
+
   res.render("productListCategory", {
     products: products,
+    categories: categories,
     pagination: pagination,
     nameDirection: getCurrentColumnDirection("name", sort, direction),
     quantityDirection: getCurrentColumnDirection("quantity", sort, direction),

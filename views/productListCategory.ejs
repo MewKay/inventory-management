@@ -10,14 +10,20 @@
       <div class="category-list-container">
         <div class="category-select">
           Show category :
-          <button
-            class="select-expand"
-            aria-label="Select products' category to display"
-          >
-            <%= products[0].category %> 
-          </button>
           <ul>
-            <!-- TODO : List every available category from db -->
+            <button
+              class="select-expand"
+              aria-label="Select products' category to display"
+            >
+              <%= products[0].category %> 
+            </button>
+            <% categories.forEach((category) => { %>
+              <li>
+                <a href="<%= category.id %>">
+                  <%= category.name %>
+                </a>
+              </li>
+            <% }) %>
           </ul>
         </div>
         <%- include("partials/productTable.ejs", { 
