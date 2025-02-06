@@ -84,10 +84,26 @@ const getTotalProductsCountByCategory =
     return rows[0].count;
   };
 
+const getProductDetails = async function queryProductDataByIdFromDB(productId) {
+  const query = `
+    SELECT p.id, p.name, quantity, unit, price, c.name AS category, 
+      quantity * price AS total_stock_price
+    FROM product p
+    INNER JOIN category c 
+      ON p.category_id = c.id
+    WHERE p.id = $1;
+  `;
+  const values = [productId];
+
+  const { rows } = await pool.query(query, values);
+  return rows[0];
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
   getAllProductsByCategory,
   getTotalProductsCount,
   getTotalProductsCountByCategory,
+  getProductDetails,
 };
