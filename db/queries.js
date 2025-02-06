@@ -1,4 +1,3 @@
-const { validateTableQueryParams } = require("../utils/db");
 const pool = require("./pool");
 
 const getAllProducts = async function queryAllProductsDataFromDB(
@@ -7,11 +6,6 @@ const getAllProducts = async function queryAllProductsDataFromDB(
   productsPerPage,
   offset,
 ) {
-  const { columnToSortBy, sortDirection } = validateTableQueryParams(
-    sort,
-    direction,
-  );
-
   const query = `
     SELECT p.id, p.name, quantity, unit, price,
     CASE 
@@ -21,13 +15,23 @@ const getAllProducts = async function queryAllProductsDataFromDB(
     FROM product p
     LEFT JOIN category c 
       ON p.category_id = c.id
-    ORDER BY ${columnToSortBy} ${sortDirection}
+    ORDER BY ${sort} ${direction}
     LIMIT $1 OFFSET $2;
     `;
   const values = [productsPerPage, offset];
 
   const { rows } = await pool.query(query, values);
 
+  return rows;
+};
+
+const getAllCategories = async function queryAllCategoriesFromDB() {
+  const query = `
+    SELECT *
+    FROM category;
+  `;
+
+  const { rows } = await pool.query(query);
   return rows;
 };
 
@@ -49,20 +53,14 @@ const getAllProductsByCategory =
     productsPerPage,
     offset,
   ) {
-    // TODO: Validate categoryId before entering parameters array
-    const { columnToSortBy, sortDirection } = validateTableQueryParams(
-      sort,
-      direction,
-    );
-
     const query = `
-    SELECT p.id, p.name, quantity, unit, price, c.name AS category
-    FROM product p
-    INNER JOIN category c 
-      ON p.category_id = c.id
-    WHERE c.id = $1
-    ORDER BY ${columnToSortBy} ${sortDirection}
-    LIMIT $2 OFFSET $3;
+      SELECT p.id, p.name, quantity, unit, price, c.name AS category
+      FROM product p
+      INNER JOIN category c 
+        ON p.category_id = c.id
+      WHERE c.id = $1
+      ORDER BY ${sort} ${direction}
+      LIMIT $2 OFFSET $3;
     `;
     const values = [categoryId, productsPerPage, offset];
 
@@ -73,6 +71,7 @@ const getAllProductsByCategory =
 
 module.exports = {
   getAllProducts,
-  getTotalProductsCount,
+  getAllCategories,
   getAllProductsByCategory,
+  getTotalProductsCount,
 };

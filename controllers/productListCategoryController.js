@@ -1,16 +1,20 @@
 const { getAllProductsByCategory } = require("../db/queries");
 const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
 const { createPagination } = require("../utils/pagination");
+const validateTableQueryParams = require("../utils/validateTableQueryParams");
 
 const productsPerCategoryGet = async (req, res) => {
-  const { categoryId } = req.params;
+  const categoryId = parseInt(req.params.categoryId);
   const { sort, direction } = req.query;
   const pagination = createPagination(req.query, 10); // TODO: Change 10 to the totalProducts inside a category
 
+  const { columnToSortBy, sortDirection, categoryToShow } =
+    await validateTableQueryParams(sort, direction, categoryId);
+
   const products = await getAllProductsByCategory(
-    categoryId,
-    sort,
-    direction,
+    categoryToShow,
+    columnToSortBy,
+    sortDirection,
     pagination.productsPerPage,
     pagination.offset,
   );
