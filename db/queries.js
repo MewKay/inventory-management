@@ -89,7 +89,7 @@ const getProductDetails = async function queryProductDataByIdFromDB(productId) {
     SELECT p.id, p.name, quantity, unit, price, c.name AS category, 
       quantity * price AS total_stock_price
     FROM product p
-    INNER JOIN category c 
+    LEFT JOIN category c 
       ON p.category_id = c.id
     WHERE p.id = $1;
   `;
