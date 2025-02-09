@@ -7,11 +7,11 @@ const getCurrentColumnDirection = function getColumnDirectionIfSortedBy(
     return "";
   }
 
-  if (currentDirection === "asc") {
+  if (currentDirection === "ASC") {
     return "desc";
   }
 
-  if (currentDirection === "desc") {
+  if (currentDirection === "DESC") {
     return "asc";
   }
 };

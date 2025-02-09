@@ -1,4 +1,4 @@
-const { matchedData } = require("express-validator");
+const { matchedData, validationResult } = require("express-validator");
 const {
   getAllProductsByCategory,
   getAllCategories,
@@ -6,30 +6,28 @@ const {
 } = require("../db/queries");
 const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
 const { createPagination } = require("../utils/pagination");
-const validateTableQueryParamsOld = require("../utils/validateTableQueryParams");
 const validateTableQueryParams = require("../middlewares/validators/validateTableQueryParams");
 
 const productsPerCategoryGet = [
   validateTableQueryParams,
   async (req, res) => {
-    const { categoryId } = matchedData(req);
-    const { sort, direction } = req.query;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).send(errors.array()[0].msg);
+    }
+
+    const { categoryId, sort, direction } = matchedData(req);
     const totalProducts = await getTotalProductsCountByCategory(categoryId);
     const pagination = createPagination(req.query, totalProducts);
 
-    const { columnToSortBy, sortDirection } = await validateTableQueryParamsOld(
-      sort,
-      direction,
-    );
-
     const products = await getAllProductsByCategory(
       categoryId,
-      columnToSortBy,
-      sortDirection,
+      sort,
+      direction,
       pagination.productsPerPage,
       pagination.offset,
     );
-
     const categories = await getAllCategories();
 
     res.render("productListCategory", {
