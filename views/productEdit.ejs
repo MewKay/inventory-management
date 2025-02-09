@@ -15,7 +15,7 @@
           Delete
         </button>
       </form>
-      <form action="/edit/product/<%= product.id %>">
+      <form action="/edit/products/<%= product.id %>" method="post">
         <%- include("partials/productForm.ejs", { product, categories }) %>
         <div>
           <a href="/view/products/<%= product.id %>">Return</a>

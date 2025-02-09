@@ -1,5 +1,9 @@
 const { validationResult, matchedData } = require("express-validator");
-const { getProductDetails, getAllCategories } = require("../db/queries");
+const {
+  getProductDetails,
+  getAllCategories,
+  updateProduct,
+} = require("../db/queries");
 const validateProductParam = require("../middlewares/validators/validateProductParam");
 
 const productEditGet = [
@@ -23,4 +27,13 @@ const productEditGet = [
   },
 ];
 
-module.exports = { productEditGet };
+const productEditUpdate = async (req, res) => {
+  const id = parseInt(req.params.productId);
+  const product = { ...req.body, category_id: parseInt(req.body.category_id) };
+
+  await updateProduct({ id, ...product });
+
+  res.redirect(`/view/products/${id}`);
+};
+
+module.exports = { productEditGet, productEditUpdate };

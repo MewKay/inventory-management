@@ -12,7 +12,7 @@
 
 <div>
   <label for="product-category">Category :</label>
-  <select name="category_id" id="product-category" required>
+  <select name="category_id" id="product-category">
     <option value="">Uncategorized</option>
     <% categories.forEach((category) => { %>
       <option value="<%= category.id %>"

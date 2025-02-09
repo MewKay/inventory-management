@@ -99,6 +99,29 @@ const getProductDetails = async function queryProductDataByIdFromDB(productId) {
   return rows[0];
 };
 
+const updateProduct = async function updateProductDataInDB(product) {
+  const query = `
+    UPDATE product
+    SET 
+      name = $1,
+      quantity = $2,
+      unit = $3,
+      price = $4,
+      category_id = $5
+    WHERE id = $6;
+  `;
+  const values = [
+    product.name,
+    product.quantity,
+    product.unit,
+    product.price,
+    product.category_id,
+    product.id,
+  ];
+
+  await pool.query(query, values);
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -106,4 +129,5 @@ module.exports = {
   getTotalProductsCount,
   getTotalProductsCountByCategory,
   getProductDetails,
+  updateProduct,
 };
