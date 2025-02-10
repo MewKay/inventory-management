@@ -5,6 +5,7 @@ const {
   updateProduct,
 } = require("../db/queries");
 const validateProductParam = require("../middlewares/validators/validateProductParam");
+const validateProductForm = require("../middlewares/validators/validateProductForm");
 
 const productEditGet = [
   validateProductParam,
@@ -27,13 +28,23 @@ const productEditGet = [
   },
 ];
 
-const productEditUpdate = async (req, res) => {
-  const id = parseInt(req.params.productId);
-  const product = { ...req.body, category_id: parseInt(req.body.category_id) };
+const productEditUpdate = [
+  validateProductParam,
+  validateProductForm,
+  async (req, res) => {
+    const errors = validationResult(req);
 
-  await updateProduct({ id, ...product });
+    if (!errors.isEmpty()) {
+      return res.status(400).send(errors.array()[0].msg);
+    }
 
-  res.redirect(`/view/products/${id}`);
-};
+    const { productId, ...formData } = matchedData(req);
+    const product = { id: productId, ...formData };
+
+    await updateProduct(product);
+
+    res.redirect(`/view/products/${product.id}`);
+  },
+];
 
 module.exports = { productEditGet, productEditUpdate };
