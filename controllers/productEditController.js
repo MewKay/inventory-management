@@ -35,7 +35,22 @@ const productEditUpdate = [
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      return res.status(400).send(errors.array()[0].msg);
+      const isProductIdValid = Object.keys(errors.mapped())[0] !== "productId";
+
+      if (!isProductIdValid) {
+        return res.status(400).send(errors.mapped().productId.msg);
+      }
+
+      const { productId } = matchedData(req);
+      const product = await getProductDetails(productId);
+      const categories = await getAllCategories();
+
+      return res.status(400).render("productEdit", {
+        title: "Edit Product",
+        product: product,
+        categories: categories,
+        errors: errors.array(),
+      });
     }
 
     const { productId, ...formData } = matchedData(req);
