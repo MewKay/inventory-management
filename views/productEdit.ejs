@@ -20,10 +20,11 @@
         </form>
       </header>
       
+      <!-- TODO: Error messages will be displayed on each field inside productForm view -->
       <% if (locals.errors) { %>
         <ul>
-          <% errors.forEach((error) => { %>
-           <li><%= error.msg %></li>
+          <% errors.forEach((errorMessage) => { %>
+           <li><%= errorMessage %></li>
           <% }) %>
         </ul>
       <% } %>

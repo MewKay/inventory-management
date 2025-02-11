@@ -6,6 +6,7 @@ const {
 } = require("../db/queries");
 const validateProductParam = require("../middlewares/validators/validateProductParam");
 const validateProductForm = require("../middlewares/validators/validateProductForm");
+const errorInvalidProductUpdateDataHandler = require("../middlewares/errors/errorInvalidProductUpdateDataHandler");
 
 const productEditGet = [
   validateProductParam,
@@ -31,28 +32,8 @@ const productEditGet = [
 const productEditUpdate = [
   validateProductParam,
   validateProductForm,
+  errorInvalidProductUpdateDataHandler,
   async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      const isProductIdValid = Object.keys(errors.mapped())[0] !== "productId";
-
-      if (!isProductIdValid) {
-        return res.status(400).send(errors.mapped().productId.msg);
-      }
-
-      const { productId } = matchedData(req);
-      const product = await getProductDetails(productId);
-      const categories = await getAllCategories();
-
-      return res.status(400).render("productEdit", {
-        title: "Edit Product",
-        product: product,
-        categories: categories,
-        errors: errors.array(),
-      });
-    }
-
     const { productId, ...formData } = matchedData(req);
     const product = { id: productId, ...formData };
 
