@@ -1,4 +1,4 @@
-const { matchedData, validationResult } = require("express-validator");
+const { matchedData } = require("express-validator");
 const {
   getAllProductsByCategory,
   getAllCategories,
@@ -7,16 +7,12 @@ const {
 const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
 const { createPagination } = require("../utils/pagination");
 const validateTableQueryParams = require("../middlewares/validators/validateTableQueryParams");
+const errorInvalidParamHandler = require("../middlewares/errors/errorInvalidParamHandler");
 
 const productsPerCategoryGet = [
   validateTableQueryParams,
+  errorInvalidParamHandler,
   async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).send(errors.array()[0].msg);
-    }
-
     const { categoryId, sort, direction } = matchedData(req);
     const totalProducts = await getTotalProductsCountByCategory(categoryId);
     const pagination = createPagination(req.query, totalProducts);
@@ -41,4 +37,5 @@ const productsPerCategoryGet = [
     });
   },
 ];
+
 module.exports = { productsPerCategoryGet };

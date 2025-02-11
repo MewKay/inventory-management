@@ -1,4 +1,4 @@
-const { validationResult, matchedData } = require("express-validator");
+const { matchedData } = require("express-validator");
 const {
   getProductDetails,
   getAllCategories,
@@ -7,16 +7,12 @@ const {
 const validateProductParam = require("../middlewares/validators/validateProductParam");
 const validateProductForm = require("../middlewares/validators/validateProductForm");
 const errorInvalidProductUpdateDataHandler = require("../middlewares/errors/errorInvalidProductUpdateDataHandler");
+const errorInvalidParamHandler = require("../middlewares/errors/errorInvalidParamHandler");
 
 const productEditGet = [
   validateProductParam,
+  errorInvalidParamHandler,
   async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).send(errors.array()[0].msg);
-    }
-
     const { productId } = matchedData(req);
     const product = await getProductDetails(productId);
     const categories = await getAllCategories();
@@ -32,6 +28,7 @@ const productEditGet = [
 
 const productEditUpdate = [
   validateProductParam,
+  errorInvalidParamHandler,
   validateProductForm,
   errorInvalidProductUpdateDataHandler,
   async (req, res) => {
