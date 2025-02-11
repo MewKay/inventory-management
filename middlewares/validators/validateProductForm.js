@@ -14,12 +14,15 @@ const { body } = new ExpressValidator({
   },
 });
 
+const defaultLocale = "en-US";
+const validSymbols = " .,-'()&/+:;";
+
 const validateProductForm = [
   body("name")
     .trim()
     .isLength({ min: 1, max: 255 })
     .withMessage("Name is required to be between 1 and 255 characters.")
-    .isAlphanumeric()
+    .isAlphanumeric(defaultLocale, { ignore: validSymbols })
     .withMessage("Name have to be alphanumeric."),
   body("category_id")
     .isInt()
