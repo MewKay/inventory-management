@@ -1,5 +1,12 @@
-<!-- TODO: Add error messages above each field -->
 <div>
+  <% if (errors.name) { %>
+    <ul class="error-messages">
+      <% errors.name.forEach((message) => { %>
+        <li><%= message %></li>
+      <% }) %>    
+    </ul>
+  <% } %>
+
   <label for="product-name">Name :</label>
   <input
     type="text"
@@ -12,6 +19,14 @@
 </div>
 
 <div>
+  <% if (errors.category_id) { %>
+    <ul class="error-messages">
+      <% errors.category_id.forEach((message) => { %>
+        <li><%= message %></li>
+      <% }) %>    
+    </ul>
+  <% } %>
+
   <label for="product-category">Category :</label>
   <select name="category_id" id="product-category">
     <option value="">Uncategorized</option>
@@ -28,6 +43,21 @@
 </div>
 
 <div>
+  <% if (errors.quantity || errors.unit) { %>
+    <ul class="error-messages">
+      <% if (errors.quantity) { %>
+        <% errors.quantity.forEach((message) => { %>
+          <li><%= message %></li>
+        <% }) %>    
+      <% } %>
+      <% if (errors.unit) { %>
+        <% errors.unit.forEach((message) => { %>
+          <li><%= message %></li>
+        <% }) %>    
+      <% } %>
+    </ul>
+  <% } %>
+
   <label for="product-quantity">Quantity :</label>
   <input
     type="number"
@@ -49,6 +79,14 @@
 </div>
 
 <div>
+  <% if (errors.price) { %>
+    <ul class="error-messages">
+      <% errors.price.forEach((message) => { %>
+        <li><%= message %></li>
+      <% }) %>    
+    </ul>
+  <% } %>
+
   <label for="product-price">Price (per unit):</label>
   <input
     type="number"

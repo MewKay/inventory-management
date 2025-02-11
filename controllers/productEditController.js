@@ -25,6 +25,7 @@ const productEditGet = [
       title: "Edit Product",
       product: product,
       categories: categories,
+      errors: [], // Pass in no-error array to avoid ReferenceError
     });
   },
 ];

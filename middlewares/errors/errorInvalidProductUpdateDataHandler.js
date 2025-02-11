@@ -23,7 +23,7 @@ const errorInvalidProductUpdateDataHandler = async (req, res, next) => {
     title: "Edit Product",
     product: { ...product, ...validUserInputs },
     categories: categories,
-    errors: Object.values(errorsMessages).flat(), // TODO: Change to raw errorsMessages when view is updated
+    errors: errorsMessages,
   });
 };
 

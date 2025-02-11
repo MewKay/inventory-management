@@ -20,17 +20,8 @@
         </form>
       </header>
       
-      <!-- TODO: Error messages will be displayed on each field inside productForm view -->
-      <% if (locals.errors) { %>
-        <ul>
-          <% errors.forEach((errorMessage) => { %>
-           <li><%= errorMessage %></li>
-          <% }) %>
-        </ul>
-      <% } %>
-
       <form action="/edit/products/<%= product.id %>" method="post">
-        <%- include("partials/productForm.ejs", { product, categories }) %>
+        <%- include("partials/productForm.ejs", { product, categories, errors }) %>
         <div>
           <a href="/view/products/<%= product.id %>">Return</a>
           <button type="submit">
