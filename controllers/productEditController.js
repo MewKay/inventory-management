@@ -41,4 +41,13 @@ const productEditUpdate = [
   },
 ];
 
-module.exports = { productEditGet, productEditUpdate };
+const productEditDelete = [
+  validateProductParam,
+  errorInvalidParamHandler,
+  (req, res) => {
+    const productId = parseInt(req.params.productId);
+    res.send(`Product ${productId} was deleted! (well not exactly but WIP!)`);
+  },
+];
+
+module.exports = { productEditGet, productEditUpdate, productEditDelete };

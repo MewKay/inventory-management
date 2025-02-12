@@ -4,5 +4,6 @@ const controller = require("../controllers/productEditController");
 
 productEditRouter.get("/", controller.productEditGet);
 productEditRouter.post("/", controller.productEditUpdate);
+productEditRouter.post("/delete", controller.productEditDelete);
 
 module.exports = productEditRouter;
