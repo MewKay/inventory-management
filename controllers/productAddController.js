@@ -1,4 +1,6 @@
-const { getAllCategories } = require("../db/queries");
+const { matchedData, validationResult } = require("express-validator");
+const { getAllCategories, addProduct } = require("../db/queries");
+const validateProductForm = require("../middlewares/validators/validateProductForm");
 
 const emptyFieldsProduct = {
   name: "",
@@ -21,4 +23,20 @@ const productAddGet = [
   },
 ];
 
-module.exports = { productAddGet };
+const productAddNew = [
+  validateProductForm,
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.send("Invalid Inputs"); // TODO: Error handling to be extract to its own module.
+    }
+
+    const newProduct = matchedData(req);
+    const { id: newProductId } = await addProduct(newProduct);
+
+    res.redirect(`/view/products/${newProductId}`);
+  },
+];
+
+module.exports = { productAddGet, productAddNew };

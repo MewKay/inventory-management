@@ -133,6 +133,27 @@ const deleteProduct = async function deleteProductWithIdFromDB(productId) {
   await pool.query(query, values);
 };
 
+const addProduct = async function addProductAndReturnItsIdToDB(product) {
+  const query = `
+    INSERT INTO product
+      (name, category_id, quantity, unit, price)
+    VALUES
+      ($1, $2, $3, $4, $5)
+    RETURNING id;
+  `;
+  const values = [
+    product.name,
+    product.category_id,
+    product.quantity,
+    product.unit,
+    product.price,
+  ];
+
+  const { rows } = await pool.query(query, values);
+
+  return rows[0];
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -142,4 +163,5 @@ module.exports = {
   getProductDetails,
   updateProduct,
   deleteProduct,
+  addProduct,
 };
