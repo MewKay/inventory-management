@@ -3,6 +3,7 @@ const {
   getProductDetails,
   getAllCategories,
   updateProduct,
+  deleteProduct,
 } = require("../db/queries");
 const validateProductParam = require("../middlewares/validators/validateProductParam");
 const validateProductForm = require("../middlewares/validators/validateProductForm");
@@ -44,9 +45,12 @@ const productEditUpdate = [
 const productEditDelete = [
   validateProductParam,
   errorInvalidParamHandler,
-  (req, res) => {
-    const productId = parseInt(req.params.productId);
-    res.send(`Product ${productId} was deleted! (well not exactly but WIP!)`);
+  async (req, res) => {
+    const { productId } = matchedData(req);
+    await deleteProduct(productId);
+    res.send(
+      `Product ${productId} was deleted successfully! (For real this time)!`,
+    );
   },
 ];
 

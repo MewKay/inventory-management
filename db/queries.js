@@ -122,6 +122,17 @@ const updateProduct = async function updateProductDataInDB(product) {
   await pool.query(query, values);
 };
 
+const deleteProduct = async function deleteProductWithIdFromDB(productId) {
+  const query = `
+    DELETE 
+    FROM product
+    WHERE id = $1;
+  `;
+  const values = [productId];
+
+  await pool.query(query, values);
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -130,4 +141,5 @@ module.exports = {
   getTotalProductsCountByCategory,
   getProductDetails,
   updateProduct,
+  deleteProduct,
 };
