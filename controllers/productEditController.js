@@ -47,10 +47,13 @@ const productEditDelete = [
   errorInvalidParamHandler,
   async (req, res) => {
     const { productId } = matchedData(req);
+    const { name: productName } = await getProductDetails(productId);
     await deleteProduct(productId);
-    res.send(
-      `Product ${productId} was deleted successfully! (For real this time)!`,
-    );
+
+    res.render("productDeletedSuccess", {
+      title: "Operation Success",
+      productName: productName,
+    });
   },
 ];
 
