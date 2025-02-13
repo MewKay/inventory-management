@@ -17,26 +17,13 @@ const productUpdateValidationHandler = async (req, res, next) => {
 
   const { productId, ...validUserInputs } = matchedData(req);
 
-  const { id, name, quantity, unit, price, category } =
-    await getProductDetails(productId);
+  const product = await getProductDetails(productId);
   const categories = await getAllCategories();
-
-  // Change product's property 'category' to its 'category_id' counterpart
-  // to match the structure of 'validUserInputs'.
-  // Will be overwritten by 'category_id' in 'validUserInputs' when passed to view.
-  const category_id = categories.find(
-    (categoryRow) => categoryRow.name === category,
-  );
 
   return res.status(400).render("productEdit", {
     title: "Edit Product",
     product: {
-      id,
-      name,
-      quantity,
-      unit,
-      price,
-      category_id,
+      ...product,
       ...validUserInputs,
     },
     categories: categories,

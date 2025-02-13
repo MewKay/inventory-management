@@ -87,7 +87,7 @@ const getTotalProductsCountByCategory =
 const getProductDetails = async function queryProductDataByIdFromDB(productId) {
   const query = `
     SELECT p.id, p.name, quantity, unit, price, c.name AS category, 
-      quantity * price AS total_stock_price
+      p.category_id, quantity * price AS total_stock_price
     FROM product p
     LEFT JOIN category c 
       ON p.category_id = c.id
