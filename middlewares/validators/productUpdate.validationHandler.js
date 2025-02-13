@@ -2,7 +2,7 @@ const { validationResult, matchedData } = require("express-validator");
 const { getProductDetails, getAllCategories } = require("../../db/queries");
 const { groupErrorsByField } = require("../../utils/errors");
 
-const errorInvalidProductUpdateDataHandler = async (req, res, next) => {
+const productUpdateValidationHandler = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -36,4 +36,4 @@ const errorInvalidProductUpdateDataHandler = async (req, res, next) => {
   });
 };
 
-module.exports = errorInvalidProductUpdateDataHandler;
+module.exports = productUpdateValidationHandler;

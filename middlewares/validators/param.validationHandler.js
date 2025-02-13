@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 
-const errorInvalidParamHandler = (req, res, next) => {
+const paramValidationHandler = (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -14,4 +14,4 @@ const errorInvalidParamHandler = (req, res, next) => {
   return res.status(400).send(paramError.msg);
 };
 
-module.exports = errorInvalidParamHandler;
+module.exports = paramValidationHandler;

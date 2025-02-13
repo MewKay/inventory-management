@@ -3,7 +3,7 @@ const { groupErrorsByField } = require("../../utils/errors");
 const { getAllCategories } = require("../../db/queries");
 const emptyProductFields = require("../../utils/constants/emptyProductFields");
 
-const errorInvalidProductAddDataHandler = async (req, res, next) => {
+const productAddValidationHandler = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -23,4 +23,4 @@ const errorInvalidProductAddDataHandler = async (req, res, next) => {
   });
 };
 
-module.exports = errorInvalidProductAddDataHandler;
+module.exports = productAddValidationHandler;

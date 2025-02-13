@@ -7,12 +7,12 @@ const {
 } = require("../db/queries");
 const validateProductParam = require("../middlewares/validators/validateProductParam");
 const validateProductForm = require("../middlewares/validators/validateProductForm");
-const errorInvalidProductUpdateDataHandler = require("../middlewares/errors/errorInvalidProductUpdateDataHandler");
-const errorInvalidParamHandler = require("../middlewares/errors/errorInvalidParamHandler");
+const productUpdateValidationHandler = require("../middlewares/validators/productUpdate.validationHandler");
+const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
 
 const productEditGet = [
   validateProductParam,
-  errorInvalidParamHandler,
+  paramValidationHandler,
   async (req, res) => {
     const { productId } = matchedData(req);
     const product = await getProductDetails(productId);
@@ -29,9 +29,9 @@ const productEditGet = [
 
 const productEditUpdate = [
   validateProductParam,
-  errorInvalidParamHandler,
+  paramValidationHandler,
   validateProductForm,
-  errorInvalidProductUpdateDataHandler,
+  productUpdateValidationHandler,
   async (req, res) => {
     const { productId, ...formData } = matchedData(req);
     const product = { id: productId, ...formData };
@@ -44,7 +44,7 @@ const productEditUpdate = [
 
 const productEditDelete = [
   validateProductParam,
-  errorInvalidParamHandler,
+  paramValidationHandler,
   async (req, res) => {
     const { productId } = matchedData(req);
     const { name: productName } = await getProductDetails(productId);

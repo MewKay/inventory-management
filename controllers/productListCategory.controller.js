@@ -7,11 +7,11 @@ const {
 const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
 const { createPagination } = require("../utils/pagination");
 const validateTableQueryParams = require("../middlewares/validators/validateTableQueryParams");
-const errorInvalidParamHandler = require("../middlewares/errors/errorInvalidParamHandler");
+const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
 
 const productsPerCategoryGet = [
   validateTableQueryParams,
-  errorInvalidParamHandler,
+  paramValidationHandler,
   async (req, res) => {
     const { categoryId, sort, direction } = matchedData(req);
     const totalProducts = await getTotalProductsCountByCategory(categoryId);
