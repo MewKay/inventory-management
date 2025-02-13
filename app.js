@@ -6,12 +6,12 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
-const indexRouter = require("./routes/indexRouter");
-const productListRouter = require("./routes/productListRouter");
-const productListCategoryRouter = require("./routes/productListCategoryRouter");
-const productDetailsRouter = require("./routes/productDetailsRouter");
-const productEditRouter = require("./routes/productEditRouter");
-const productAddRouter = require("./routes/productAddRouter");
+const indexRouter = require("./routes/index.router");
+const productListRouter = require("./routes/productList.router");
+const productListCategoryRouter = require("./routes/productListCategory.router");
+const productDetailsRouter = require("./routes/productDetails.router");
+const productEditRouter = require("./routes/productEdit.router");
+const productAddRouter = require("./routes/productAdd.router");
 app.use("/", indexRouter);
 app.use("/view/products", productListRouter);
 app.use("/view/category/:categoryId", productListCategoryRouter);
