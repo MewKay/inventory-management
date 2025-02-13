@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const controller = require("../controllers/productListCategoryController");
+const controller = require("../controllers/productListCategory.controller");
 
 const productListCategoryRouter = Router({ mergeParams: true });
 
