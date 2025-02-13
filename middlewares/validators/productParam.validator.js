@@ -11,11 +11,11 @@ const { param } = new ExpressValidator({
   },
 });
 
-const validateProductParam = param("productId")
+const productParamValidator = param("productId")
   .isInt()
   .withMessage("Invalid ID Type Value: Not an Integer")
   .bail()
   .toInt()
   .isProductExisting();
 
-module.exports = validateProductParam;
+module.exports = productParamValidator;

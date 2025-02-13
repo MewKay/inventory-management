@@ -1,7 +1,7 @@
 const { getAllProducts, getTotalProductsCount } = require("../db/queries");
 const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
 const { createPagination } = require("../utils/pagination");
-const validateTableQueryParams = require("../middlewares/validators/validateTableQueryParams");
+const validateTableQueryParams = require("../middlewares/validators/tableQueryParams.validator");
 const { matchedData } = require("express-validator");
 
 const productsGet = [

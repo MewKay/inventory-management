@@ -38,7 +38,7 @@ const { param, query } = new ExpressValidator(
   },
 );
 
-const validateTableQueryParams = [
+const tableQueryParamsValidator = [
   param("categoryId")
     .optional()
     .isCategoriesNotEmpty()
@@ -48,4 +48,4 @@ const validateTableQueryParams = [
   query("direction").toUpperCase().defaultDirectionIfInvalid(),
 ];
 
-module.exports = validateTableQueryParams;
+module.exports = tableQueryParamsValidator;

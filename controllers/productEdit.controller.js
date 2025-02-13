@@ -5,13 +5,13 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../db/queries");
-const validateProductParam = require("../middlewares/validators/validateProductParam");
-const validateProductForm = require("../middlewares/validators/validateProductForm");
+const productParamValidator = require("../middlewares/validators/productParam.validator");
+const productFormValidator = require("../middlewares/validators/productForm.validator");
 const productUpdateValidationHandler = require("../middlewares/validators/productUpdate.validationHandler");
 const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
 
 const productEditGet = [
-  validateProductParam,
+  productParamValidator,
   paramValidationHandler,
   async (req, res) => {
     const { productId } = matchedData(req);
@@ -28,9 +28,9 @@ const productEditGet = [
 ];
 
 const productEditUpdate = [
-  validateProductParam,
+  productParamValidator,
   paramValidationHandler,
-  validateProductForm,
+  productFormValidator,
   productUpdateValidationHandler,
   async (req, res) => {
     const { productId, ...formData } = matchedData(req);
@@ -43,7 +43,7 @@ const productEditUpdate = [
 ];
 
 const productEditDelete = [
-  validateProductParam,
+  productParamValidator,
   paramValidationHandler,
   async (req, res) => {
     const { productId } = matchedData(req);

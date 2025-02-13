@@ -1,7 +1,7 @@
 const { matchedData } = require("express-validator");
 const { getAllCategories, addProduct } = require("../db/queries");
 const emptyProductFields = require("../utils/constants/emptyProductFields");
-const validateProductForm = require("../middlewares/validators/validateProductForm");
+const productFormValidator = require("../middlewares/validators/productForm.validator");
 const productAddValidationHandler = require("../middlewares/validators/productAdd.validationHandler");
 
 const productAddGet = [
@@ -18,7 +18,7 @@ const productAddGet = [
 ];
 
 const productAddNew = [
-  validateProductForm,
+  productFormValidator,
   productAddValidationHandler,
   async (req, res) => {
     const newProduct = matchedData(req);

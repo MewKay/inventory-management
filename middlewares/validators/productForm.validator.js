@@ -17,31 +17,35 @@ const { body } = new ExpressValidator({
 const defaultLocale = "en-US";
 const validSymbols = " .,-'()&/+:;";
 
-const validateProductForm = [
+const productFormValidator = [
   body("name")
     .trim()
     .isLength({ min: 1, max: 255 })
     .withMessage("Name is required to be between 1 and 255 characters.")
     .isAlphanumeric(defaultLocale, { ignore: validSymbols })
     .withMessage("Name have to be alphanumeric."),
+
   body("category_id")
     .isInt()
     .withMessage("Invalid Category id Value.")
     .bail()
     .toInt()
     .isInCategoryIds(),
+
   body("quantity")
     .trim()
     .notEmpty()
     .withMessage("Quantity must not be empty.")
     .isInt({ min: 0 })
     .withMessage("Quantity have to be a non-negative integer."),
+
   body("unit")
     .trim()
     .isLength({ min: 1, max: 50 })
     .withMessage("Unit is required to be between 1 and 50 characters.")
     .isAlpha()
     .withMessage("Unit must only contains characters."),
+
   body("price")
     .trim()
     .notEmpty()
@@ -54,4 +58,4 @@ const validateProductForm = [
     ),
 ];
 
-module.exports = validateProductForm;
+module.exports = productFormValidator;

@@ -1,10 +1,10 @@
 const { matchedData } = require("express-validator");
 const { getProductDetails } = require("../db/queries");
-const validateProductParam = require("../middlewares/validators/validateProductParam");
+const productParamValidator = require("../middlewares/validators/productParam.validator");
 const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
 
 const productGet = [
-  validateProductParam,
+  productParamValidator,
   paramValidationHandler,
   async (req, res) => {
     const { productId } = matchedData(req);
