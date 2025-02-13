@@ -17,7 +17,7 @@ const productUpdateValidationHandler = async (req, res, next) => {
 
   const { productId, ...validUserInputs } = matchedData(req);
 
-  const { name, quantity, unit, price, category } =
+  const { id, name, quantity, unit, price, category } =
     await getProductDetails(productId);
   const categories = await getAllCategories();
 
@@ -30,7 +30,15 @@ const productUpdateValidationHandler = async (req, res, next) => {
 
   return res.status(400).render("productEdit", {
     title: "Edit Product",
-    product: { name, quantity, unit, price, category_id, ...validUserInputs },
+    product: {
+      id,
+      name,
+      quantity,
+      unit,
+      price,
+      category_id,
+      ...validUserInputs,
+    },
     categories: categories,
     errors: errorsMessages,
   });
