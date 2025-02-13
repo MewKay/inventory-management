@@ -1,18 +1,25 @@
 const { ExpressValidator } = require("express-validator");
 const { getAllCategories } = require("../../db/queries");
 
-const { body } = new ExpressValidator({
-  isInCategoryIds: async (value) => {
-    const categoryIds = (await getAllCategories()).map(
-      (category) => category.id,
-    );
+const { body } = new ExpressValidator(
+  {
+    isInCategoryIds: async (value) => {
+      const categoryIds = (await getAllCategories()).map(
+        (category) => category.id,
+      );
 
-    const isValueInCategoryIds = categoryIds.includes(value);
-    if (!isValueInCategoryIds) {
-      throw new Error("Category not found.");
-    }
+      const isValueInCategoryIds = categoryIds.includes(value);
+      if (!isValueInCategoryIds) {
+        throw new Error("Category not found.");
+      }
+    },
   },
-});
+  {
+    handleUncategorizedProduct: (value) => {
+      return value === "" ? null : value;
+    },
+  },
+);
 
 const defaultLocale = "en-US";
 const validSymbols = " .,-'()&/+:;";
@@ -26,6 +33,8 @@ const productFormValidator = [
     .withMessage("Name have to be alphanumeric."),
 
   body("category_id")
+    .handleUncategorizedProduct()
+    .optional({ values: "null" })
     .isInt()
     .withMessage("Invalid Category id Value.")
     .bail()
