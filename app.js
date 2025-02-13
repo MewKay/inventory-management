@@ -12,6 +12,7 @@ const productListCategoryRouter = require("./routes/productListCategory.router")
 const productDetailsRouter = require("./routes/productDetails.router");
 const productEditRouter = require("./routes/productEdit.router");
 const productAddRouter = require("./routes/productAdd.router");
+const notFoundRoute = require("./middlewares/errors/notFoundRoute");
 const errorHandler = require("./middlewares/errors/errorHandler");
 app.use("/", indexRouter);
 app.use("/view/products", productListRouter);
@@ -19,6 +20,8 @@ app.use("/view/category/:categoryId", productListCategoryRouter);
 app.use("/view/products/:productId", productDetailsRouter);
 app.use("/edit/products/new", productAddRouter);
 app.use("/edit/products/:productId", productEditRouter);
+
+app.use(notFoundRoute);
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
