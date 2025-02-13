@@ -32,7 +32,7 @@
     <option value="">Uncategorized</option>
     <% categories.forEach((category) => { %>
       <option value="<%= category.id %>"
-        <% if (category.name === product.category) { %>
+        <% if (category.id === product.category_id) { %>
           selected
         <% } %>
         >

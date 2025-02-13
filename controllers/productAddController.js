@@ -1,14 +1,8 @@
-const { matchedData, validationResult } = require("express-validator");
+const { matchedData } = require("express-validator");
 const { getAllCategories, addProduct } = require("../db/queries");
+const emptyProductFields = require("../utils/constants/emptyProductFields");
 const validateProductForm = require("../middlewares/validators/validateProductForm");
-
-const emptyFieldsProduct = {
-  name: "",
-  quantity: "",
-  unit: "",
-  price: "",
-  category_id: "",
-};
+const errorInvalidProductAddDataHandler = require("../middlewares/errors/errorInvalidProductAddDataHandler");
 
 const productAddGet = [
   async (req, res) => {
@@ -16,7 +10,7 @@ const productAddGet = [
 
     res.render("productAdd", {
       title: "Add new product",
-      product: emptyFieldsProduct,
+      product: emptyProductFields,
       categories: categories,
       errors: [],
     });
@@ -25,13 +19,8 @@ const productAddGet = [
 
 const productAddNew = [
   validateProductForm,
+  errorInvalidProductAddDataHandler,
   async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.send("Invalid Inputs"); // TODO: Error handling to be extract to its own module.
-    }
-
     const newProduct = matchedData(req);
     const { id: newProductId } = await addProduct(newProduct);
 
