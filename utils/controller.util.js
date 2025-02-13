@@ -16,4 +16,4 @@ const getCurrentColumnDirection = function getColumnDirectionIfSortedBy(
   }
 };
 
-module.exports = getCurrentColumnDirection;
+module.exports = { getCurrentColumnDirection };

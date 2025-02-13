@@ -1,6 +1,6 @@
 const { validationResult, matchedData } = require("express-validator");
 const { getProductDetails, getAllCategories } = require("../../db/queries");
-const { groupErrorsByField } = require("../../utils/errors");
+const { groupErrorsByField } = require("../../utils/validation.util");
 
 const productUpdateValidationHandler = async (req, res, next) => {
   const errors = validationResult(req);

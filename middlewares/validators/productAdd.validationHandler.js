@@ -1,5 +1,5 @@
 const { validationResult, matchedData } = require("express-validator");
-const { groupErrorsByField } = require("../../utils/errors");
+const { groupErrorsByField } = require("../../utils/validation.util");
 const { getAllCategories } = require("../../db/queries");
 const emptyProductFields = require("../../utils/constants/emptyProductFields");
 

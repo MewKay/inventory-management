@@ -4,7 +4,7 @@ const {
   getAllCategories,
   getTotalProductsCountByCategory,
 } = require("../db/queries");
-const getCurrentColumnDirection = require("../utils/getCurrentColumnDirection");
+const { getCurrentColumnDirection } = require("../utils/controller.util");
 const { createPagination } = require("../utils/pagination");
 const validateTableQueryParams = require("../middlewares/validators/tableQueryParams.validator");
 const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
