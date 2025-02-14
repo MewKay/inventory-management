@@ -1,21 +1,9 @@
-const { ExpressValidator } = require("express-validator");
-const { getProductDetails } = require("../../db/queries");
-
-const { param } = new ExpressValidator({
-  isProductExisting: async (value) => {
-    const product = await getProductDetails(value);
-
-    if (!product) {
-      throw new Error("Product not found");
-    }
-  },
-});
+const { param } = require("express-validator");
 
 const productParamValidator = param("productId")
   .isInt()
   .withMessage("Invalid ID Type Value: Not an Integer")
   .bail()
-  .toInt()
-  .isProductExisting();
+  .toInt();
 
 module.exports = productParamValidator;

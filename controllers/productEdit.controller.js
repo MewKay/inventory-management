@@ -10,14 +10,21 @@ const productFormValidator = require("../middlewares/validators/productForm.vali
 const productUpdateValidationHandler = require("../middlewares/validators/productUpdate.validationHandler");
 const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
 const asyncHandler = require("express-async-handler");
+const NotFoundError = require("../errors/NotFoundError");
 
 const productEditGet = [
   productParamValidator,
   paramValidationHandler,
   asyncHandler(async (req, res) => {
     const { productId } = matchedData(req);
-    const product = await getProductDetails(productId);
-    const categories = await getAllCategories();
+    const [product, categories] = await Promise.all([
+      getProductDetails(productId),
+      getAllCategories(),
+    ]);
+
+    if (!product) {
+      throw new NotFoundError("Product requested was not found.");
+    }
 
     res.render("productEdit", {
       title: "Edit Product",
