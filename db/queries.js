@@ -119,7 +119,8 @@ const updateProduct = async function updateProductDataInDB(product) {
     product.id,
   ];
 
-  await pool.query(query, values);
+  const result = await pool.query(query, values);
+  return result;
 };
 
 const deleteProduct = async function deleteProductWithIdFromDB(productId) {
@@ -130,7 +131,8 @@ const deleteProduct = async function deleteProductWithIdFromDB(productId) {
   `;
   const values = [productId];
 
-  await pool.query(query, values);
+  const result = await pool.query(query, values);
+  return result;
 };
 
 const addProduct = async function addProductAndReturnItsIdToDB(product) {

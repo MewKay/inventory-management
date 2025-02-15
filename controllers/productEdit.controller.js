@@ -44,7 +44,11 @@ const productEditUpdate = [
     const { productId, ...formData } = matchedData(req);
     const product = { id: productId, ...formData };
 
-    await updateProduct(product);
+    const result = await updateProduct(product);
+
+    if (result.rowCount <= 0) {
+      throw new NotFoundError("Product update failed");
+    }
 
     res.redirect(`/view/products/${product.id}`);
   }),
@@ -55,12 +59,21 @@ const productEditDelete = [
   paramValidationHandler,
   asyncHandler(async (req, res) => {
     const { productId } = matchedData(req);
-    const { name: productName } = await getProductDetails(productId);
-    await deleteProduct(productId);
+    const product = await getProductDetails(productId);
+
+    if (!product) {
+      throw new NotFoundError("Product Not Found");
+    }
+
+    const result = await deleteProduct(productId);
+
+    if (result.rowCount <= 0) {
+      throw new NotFoundError("Product deletion failed");
+    }
 
     res.render("productDeletedSuccess", {
       title: "Operation Success",
-      productName: productName,
+      productName: product.name,
     });
   }),
 ];

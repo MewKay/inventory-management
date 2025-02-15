@@ -9,6 +9,7 @@ const { createPagination } = require("../utils/pagination");
 const validateTableQueryParams = require("../middlewares/validators/tableQueryParams.validator");
 const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
 const asyncHandler = require("express-async-handler");
+const NotFoundError = require("../errors/NotFoundError");
 
 const productsPerCategoryGet = [
   validateTableQueryParams,
@@ -26,6 +27,10 @@ const productsPerCategoryGet = [
       pagination.offset,
     );
     const categories = await getAllCategories();
+
+    if (categories.length <= 0) {
+      throw new NotFoundError("There is no category yet.");
+    }
 
     res.render("productListCategory", {
       products: products,

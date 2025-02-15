@@ -2,17 +2,7 @@ const { ExpressValidator } = require("express-validator");
 const { getAllCategories } = require("../../db/queries");
 
 const { param, query } = new ExpressValidator(
-  {
-    isCategoriesNotEmpty: async () => {
-      const categoryIds = (await getAllCategories()).map(
-        (category) => category.id,
-      );
-
-      if (categoryIds.length <= 0) {
-        throw new Error("There is no categories yet.");
-      }
-    },
-  },
+  {},
   {
     defaultCategoryIdIfInvalid: async (value) => {
       const categoryId = parseInt(value);
@@ -39,11 +29,7 @@ const { param, query } = new ExpressValidator(
 );
 
 const tableQueryParamsValidator = [
-  param("categoryId")
-    .optional()
-    .isCategoriesNotEmpty()
-    .bail()
-    .defaultCategoryIdIfInvalid(),
+  param("categoryId").optional().bail().defaultCategoryIdIfInvalid(),
   query("sort").defaultSortIfInvalid(),
   query("direction").toUpperCase().defaultDirectionIfInvalid(),
 ];
