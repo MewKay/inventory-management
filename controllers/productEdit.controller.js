@@ -59,13 +59,11 @@ const productEditDelete = [
   paramValidationHandler,
   asyncHandler(async (req, res) => {
     const { productId } = matchedData(req);
-    const product = await getProductDetails(productId);
 
-    if (!product) {
-      throw new NotFoundError("Product Not Found");
-    }
-
-    const result = await deleteProduct(productId);
+    const [product, result] = await Promise.all([
+      getProductDetails(productId),
+      deleteProduct(productId),
+    ]);
 
     if (result.rowCount <= 0) {
       throw new NotFoundError("Product deletion failed");

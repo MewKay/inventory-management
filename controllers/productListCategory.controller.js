@@ -19,14 +19,16 @@ const productsPerCategoryGet = [
     const totalProducts = await getTotalProductsCountByCategory(categoryId);
     const pagination = createPagination(req.query, totalProducts);
 
-    const products = await getAllProductsByCategory(
-      categoryId,
-      sort,
-      direction,
-      pagination.productsPerPage,
-      pagination.offset,
-    );
-    const categories = await getAllCategories();
+    const [products, categories] = await Promise.all([
+      getAllProductsByCategory(
+        categoryId,
+        sort,
+        direction,
+        pagination.productsPerPage,
+        pagination.offset,
+      ),
+      getAllCategories(),
+    ]);
 
     if (categories.length <= 0) {
       throw new NotFoundError("There is no category yet.");
