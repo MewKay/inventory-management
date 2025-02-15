@@ -14,12 +14,14 @@ const productEditRouter = require("./routes/productEdit.router");
 const productAddRouter = require("./routes/productAdd.router");
 const notFoundRouteHandler = require("./middlewares/notFoundRouteHandler");
 const errorHandler = require("./middlewares/errorHandler");
+const categoryEditRouter = require("./routes/categoryEdit.router");
 app.use("/", indexRouter);
 app.use("/view/products", productListRouter);
-app.use("/view/category/:categoryId", productListCategoryRouter);
 app.use("/view/products/:productId", productDetailsRouter);
+app.use("/view/category/:categoryId", productListCategoryRouter);
 app.use("/edit/products/new", productAddRouter);
 app.use("/edit/products/:productId", productEditRouter);
+app.use("/edit/category", categoryEditRouter);
 
 app.use(notFoundRouteHandler);
 app.use(errorHandler);
