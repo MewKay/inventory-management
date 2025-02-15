@@ -1,5 +1,6 @@
 const { ExpressValidator } = require("express-validator");
 const { getAllCategories } = require("../../db/queries");
+const ValidationError = require("../../errors/ValidationError");
 
 const { body } = new ExpressValidator(
   {
@@ -10,7 +11,7 @@ const { body } = new ExpressValidator(
 
       const isValueInCategoryIds = categoryIds.includes(value);
       if (!isValueInCategoryIds) {
-        throw new Error("Category not found.");
+        throw new ValidationError("Category not found.");
       }
     },
   },
