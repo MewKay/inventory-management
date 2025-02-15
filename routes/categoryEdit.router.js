@@ -1,9 +1,8 @@
 const { Router } = require("express");
-
 const categoryEditRouter = Router();
 
-categoryEditRouter.get("/", (req, res) => {
-  res.send("Hello Category Edit !!");
-});
+const controller = require("../controllers/categoryEdit.controller");
+
+categoryEditRouter.get("/", controller.categoryEditGet);
 
 module.exports = categoryEditRouter;

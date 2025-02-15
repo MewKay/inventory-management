@@ -35,6 +35,21 @@ const getAllCategories = async function queryAllCategoriesFromDB() {
   return rows;
 };
 
+const getAllCategoriesWithProductCount =
+  async function queryAllCategoriesWithProductCountFromDB() {
+    const query = `
+      SELECT c.id, c.name, COUNT(*) AS products_count
+      FROM category c
+      INNER JOIN product p 
+        ON p.category_id = c.id
+      GROUP BY c.id;
+    `;
+
+    const { rows } = await pool.query(query);
+
+    return rows;
+  };
+
 const getTotalProductsCount = async function queryTotalProductsCountFromDB() {
   const query = `
     SELECT COUNT(*)
@@ -159,6 +174,7 @@ const addProduct = async function addProductAndReturnItsIdToDB(product) {
 module.exports = {
   getAllProducts,
   getAllCategories,
+  getAllCategoriesWithProductCount,
   getAllProductsByCategory,
   getTotalProductsCount,
   getTotalProductsCountByCategory,
