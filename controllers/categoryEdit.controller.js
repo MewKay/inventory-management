@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const {
   getAllCategoriesWithProductCount,
   updateCategory,
+  deleteCategory,
 } = require("../db/queries");
 const NotFoundError = require("../errors/NotFoundError");
 const categoryParamValidator = require("../middlewares/validators/categoryParam.validator");
@@ -42,4 +43,20 @@ const categoryEditUpdate = [
   }),
 ];
 
-module.exports = { categoryEditGet, categoryEditUpdate };
+const categoryEditDelete = [
+  categoryParamValidator,
+  paramValidationHandler,
+  asyncHandler(async (req, res) => {
+    const { categoryId } = matchedData(req);
+
+    const result = await deleteCategory(categoryId);
+
+    if (result.rowCount >= 0) {
+      throw new NotFoundError("Failed to delete category.");
+    }
+
+    res.redirect("/edit/category");
+  }),
+];
+
+module.exports = { categoryEditGet, categoryEditUpdate, categoryEditDelete };

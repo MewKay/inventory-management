@@ -185,6 +185,18 @@ const updateCategory = async function updateCategoryDataInDB(category) {
   return result;
 };
 
+const deleteCategory = async function deleteCategoryWithIdFromDB(categoryId) {
+  const query = `
+    DELETE 
+    FROM category
+    WHERE id = $1;
+  `;
+  const values = [categoryId];
+
+  const result = await pool.query(query, values);
+  return result;
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -197,4 +209,5 @@ module.exports = {
   deleteProduct,
   addProduct,
   updateCategory,
+  deleteCategory,
 };
