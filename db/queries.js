@@ -38,9 +38,10 @@ const getAllCategories = async function queryAllCategoriesFromDB() {
 const getAllCategoriesWithProductCount =
   async function queryAllCategoriesWithProductCountFromDB() {
     const query = `
-      SELECT c.id, c.name, COUNT(*) AS products_count
+      SELECT c.id, c.name, 
+      COUNT(p.category_id) AS products_count
       FROM category c
-      INNER JOIN product p 
+      LEFT JOIN product p 
         ON p.category_id = c.id
       GROUP BY c.id
       ORDER BY c.id;
@@ -197,6 +198,17 @@ const deleteCategory = async function deleteCategoryWithIdFromDB(categoryId) {
   return result;
 };
 
+const addCategory = async function addCategoryToDB(categoryName) {
+  const query = `
+    INSERT INTO category(name)
+    VALUES ($1);
+  `;
+  const values = [categoryName];
+
+  const result = await pool.query(query, values);
+  return result;
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -210,4 +222,5 @@ module.exports = {
   addProduct,
   updateCategory,
   deleteCategory,
+  addCategory,
 };

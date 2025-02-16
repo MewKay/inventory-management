@@ -3,6 +3,7 @@ const {
   getAllCategoriesWithProductCount,
   updateCategory,
   deleteCategory,
+  addCategory,
 } = require("../db/queries");
 const NotFoundError = require("../errors/NotFoundError");
 const categoryParamValidator = require("../middlewares/validators/categoryParam.validator");
@@ -59,4 +60,25 @@ const categoryEditDelete = [
   }),
 ];
 
-module.exports = { categoryEditGet, categoryEditUpdate, categoryEditDelete };
+const categoryEditAdd = [
+  categoryFormValidator,
+  categoryFormValidationHandler,
+  asyncHandler(async (req, res) => {
+    const { name } = matchedData(req);
+
+    const result = await addCategory(name);
+
+    if (result.rowCount <= 0) {
+      throw new NotFoundError("Failed to add new category.");
+    }
+
+    res.redirect("/edit/category");
+  }),
+];
+
+module.exports = {
+  categoryEditGet,
+  categoryEditUpdate,
+  categoryEditDelete,
+  categoryEditAdd,
+};
