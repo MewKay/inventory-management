@@ -25,7 +25,11 @@
         <div class="category-card">
           <p class="display-name"><%= category.name %></p>
 
-          <form class="edit-name hidden" action="<%= category.id %>/update" method="post">
+          <form 
+            class="edit-name hidden" 
+            action="/edit/category/<%= category.id %>/update" 
+            method="post"
+          >
             <input 
               type="text"
               value="<%= category.name %>"
@@ -45,7 +49,7 @@
           Edit
         </button>
 
-        <form action="<%= category.id %>/delete" method="post">
+        <form action="/edit/category/<%= category.id %>/delete" method="post">
           <button type="submit"> 
             Delete
           </button>
