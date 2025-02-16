@@ -37,6 +37,9 @@ const productsPerCategoryGet = [
     res.render("productListCategory", {
       products: products,
       categories: categories,
+      currentCategoryName: categories.find(
+        (category) => category.id === categoryId,
+      ).name,
       pagination: pagination,
       nameDirection: getCurrentColumnDirection("name", sort, direction),
       quantityDirection: getCurrentColumnDirection("quantity", sort, direction),
