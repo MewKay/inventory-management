@@ -51,7 +51,7 @@ const categoryEditDelete = [
 
     const result = await deleteCategory(categoryId);
 
-    if (result.rowCount >= 0) {
+    if (result.rowCount <= 0) {
       throw new NotFoundError("Failed to delete category.");
     }
 

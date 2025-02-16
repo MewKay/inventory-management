@@ -13,7 +13,7 @@ const query = `
     quantity INTEGER NOT NULL,
     unit VARCHAR(50) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
-    category_id INTEGER REFERENCES category(id)
+    category_id INTEGER REFERENCES category(id) ON DELETE SET NULL
   );
 
   INSERT INTO category(name) 
