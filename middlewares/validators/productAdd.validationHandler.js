@@ -2,8 +2,9 @@ const { validationResult, matchedData } = require("express-validator");
 const { groupErrorsByField } = require("../../utils/validation.util");
 const { getAllCategories } = require("../../db/queries");
 const emptyProductFields = require("../../utils/constants/emptyProductFields");
+const asyncHandler = require("express-async-handler");
 
-const productAddValidationHandler = async (req, res, next) => {
+const productAddValidationHandler = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -21,6 +22,6 @@ const productAddValidationHandler = async (req, res, next) => {
     categories: categories,
     errors: errorsMessages,
   });
-};
+});
 
 module.exports = productAddValidationHandler;

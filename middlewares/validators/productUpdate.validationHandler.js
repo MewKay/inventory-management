@@ -1,8 +1,9 @@
 const { validationResult, matchedData } = require("express-validator");
 const { getProductDetails, getAllCategories } = require("../../db/queries");
 const { groupErrorsByField } = require("../../utils/validation.util");
+const asyncHandler = require("express-async-handler");
 
-const productUpdateValidationHandler = async (req, res, next) => {
+const productUpdateValidationHandler = asyncHandler(async (req, res, next) => {
   const errors = validationResult(req);
 
   if (errors.isEmpty()) {
@@ -17,8 +18,10 @@ const productUpdateValidationHandler = async (req, res, next) => {
 
   const { productId, ...validUserInputs } = matchedData(req);
 
-  const product = await getProductDetails(productId);
-  const categories = await getAllCategories();
+  const [product, categories] = await Promise.all([
+    getProductDetails(productId),
+    getAllCategories(),
+  ]);
 
   return res.status(400).render("productEdit", {
     title: "Edit Product",
@@ -29,6 +32,6 @@ const productUpdateValidationHandler = async (req, res, next) => {
     categories: categories,
     errors: errorsMessages,
   });
-};
+});
 
 module.exports = productUpdateValidationHandler;
