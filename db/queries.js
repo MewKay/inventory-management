@@ -172,6 +172,19 @@ const addProduct = async function addProductAndReturnItsIdToDB(product) {
   return rows[0];
 };
 
+const updateCategory = async function updateCategoryDataInDB(category) {
+  const query = `
+    UPDATE category
+    SET 
+      name = $1
+    WHERE id = $2;
+  `;
+  const values = [category.name, category.id];
+
+  const result = await pool.query(query, values);
+  return result;
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -183,4 +196,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   addProduct,
+  updateCategory,
 };

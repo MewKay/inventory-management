@@ -4,5 +4,6 @@ const categoryEditRouter = Router();
 const controller = require("../controllers/categoryEdit.controller");
 
 categoryEditRouter.get("/", controller.categoryEditGet);
+categoryEditRouter.post("/:categoryId/update", controller.categoryEditUpdate);
 
 module.exports = categoryEditRouter;
