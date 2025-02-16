@@ -61,9 +61,25 @@
     <% }) %>
 
     <div class="add-category-container">
-      <button>
+      <button class="button-toggle-new-category" onclick="addToggleForm(this)">
         + Add new category
       </button>
+
+      <div class="new-category-form hidden">
+        <form action="/edit/category/new" method="post">
+          <input 
+            type="text"
+            minlength="1"
+            maxlength="255"
+            name="name"
+            placeholder="Please insert a category name"
+            required
+          />
+          <button type="submit">Save</button>
+          <button type="reset" onclick="addToggleForm(this)">Cancel</button>
+        </form>
+        <p>0 products</p>
+      </div>
     </div>
   </main>
   <script>
@@ -74,6 +90,15 @@
       
       displayName.classList.toggle("hidden");
       editName.classList.toggle("hidden");
+    }
+
+    const addToggleForm = (button) => {
+      const addContainer = button.closest(".add-category-container");
+      const buttonNewCategory = addContainer.querySelector(".button-toggle-new-category");
+      const formNewCategory = addContainer.querySelector(".new-category-form");
+      
+      buttonNewCategory.classList.toggle("hidden");
+      formNewCategory.classList.toggle("hidden");
     }
   </script>
 </body>
