@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <% categories.forEach((category) => { %>
+      <div class="category-card-container">
+        <div class="category-card">
+          <p class="display-name"><%= category.name %></p>
+
+          <form class="edit-name hidden" action="<%= category.id %>/update" method="post">
+            <input 
+              type="text" 
+              value="<%= category.name %>"
+              minlength="1" 
+              maxlength="255" 
+              placeholder="Please insert a category name"
+              required
+            />
+            <button type="submit">Save</button>
+          </form>
+
+          <p><%= category.products_count %> products</p>
+        </div>
+
+        <button onclick="toggleForm(this)">
+          Edit
+        </button>
+
+        <form action="<%= category.id %>/delete" method="post">
+          <button type="submit"> 
+            Delete
+          </button>
+        </form>
+      </div>
+    <% }) %>
+
+    <div class="add-category-container">
+      <button>
+        + Add new category
+      </button>
+    </div>
+  </main>
+  <script>
+    const toggleForm = (button) => {
+      const categoryCard = button.closest(".category-card-container");
+      const displayName = categoryCard.querySelector(".display-name");
+      const editName = categoryCard.querySelector(".edit-name");
+      
+      displayName.classList.toggle("hidden");
+      editName.classList.toggle("hidden");
+    }
+  </script>
+</body>
+</html>

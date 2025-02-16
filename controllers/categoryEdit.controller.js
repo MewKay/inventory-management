@@ -9,7 +9,10 @@ const categoryEditGet = asyncHandler(async (req, res) => {
     throw new NotFoundError("Failed to fetch categories");
   }
 
-  res.send(categories);
+  res.render("categoryEdit", {
+    title: "Manage Categories",
+    categories: categories,
+  });
 });
 
 module.exports = { categoryEditGet };

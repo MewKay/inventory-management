@@ -42,7 +42,8 @@ const getAllCategoriesWithProductCount =
       FROM category c
       INNER JOIN product p 
         ON p.category_id = c.id
-      GROUP BY c.id;
+      GROUP BY c.id
+      ORDER BY c.id;
     `;
 
     const { rows } = await pool.query(query);
