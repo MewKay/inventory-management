@@ -12,6 +12,14 @@
 </head>
 <body>
   <main>
+    <h3>Edit Categories</h3>
+    <ul class="error-messages">
+      <% errors.forEach((error) => { %>
+        <li>
+          <%= error.msg %>
+        </li>
+      <% }) %>
+    </ul>
     <% categories.forEach((category) => { %>
       <div class="category-card-container">
         <div class="category-card">
@@ -21,7 +29,7 @@
             <input 
               type="text"
               value="<%= category.name %>"
-              minlength="1" 
+              minlength="1"
               maxlength="255"
               name="name"
               placeholder="Please insert a category name"
