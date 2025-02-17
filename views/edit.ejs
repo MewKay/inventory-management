@@ -17,10 +17,15 @@
         <a href="/edit/products/new">Add new product</a>
         <a href="/edit/category">Manage Categories</a>
         <div class="edit-product-container">
+          <ul class="error-messages">
+            <% errors.forEach((error) => { %>
+              <li><%= error.msg %></li>
+            <% }) %>
+          </ul>
           <button class="button-toggle-form" onclick="toggleForm(this)">
             Edit a product
           </button>
-          <form class="search-product hidden" action="/edit/" method="post">
+          <form class="search-product hidden" action="/edit" method="post">
             <input
               type="text"
               name="name"

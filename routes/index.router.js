@@ -8,5 +8,6 @@ indexRouter.get("/", (req, res) => {
 });
 indexRouter.get("/view", controller.viewGet);
 indexRouter.get("/edit", controller.editGet);
+indexRouter.post("/edit", controller.editProductPost);
 
 module.exports = indexRouter;
