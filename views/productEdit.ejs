@@ -6,29 +6,32 @@
     <title><%= title %></title>
   </head>
   <body>
-    <section>
-      <header>
-        <h3>Edit Product</h3>
-
-        <form action="<%= product.id %>/delete" method="post">
-          <button
-            type="submit"
-            onclick="return confirm('Are you sure you want to delete ?')"
-          >
-            Delete
-          </button>
+    <%- include("partials/header.ejs") %>
+    <main>
+      <section>
+        <header>
+          <h3>Edit Product</h3>
+  
+          <form action="<%= product.id %>/delete" method="post">
+            <button
+              type="submit"
+              onclick="return confirm('Are you sure you want to delete ?')"
+            >
+              Delete
+            </button>
+          </form>
+        </header>
+        
+        <form action="/edit/products/<%= product.id %>" method="post">
+          <%- include("partials/productForm.ejs", { product, categories, errors }) %>
+          <div>
+            <a href="/view/products/<%= product.id %>">Return</a>
+            <button type="submit">
+              Save
+            </button>
+          </div>
         </form>
-      </header>
-      
-      <form action="/edit/products/<%= product.id %>" method="post">
-        <%- include("partials/productForm.ejs", { product, categories, errors }) %>
-        <div>
-          <a href="/view/products/<%= product.id %>">Return</a>
-          <button type="submit">
-            Save
-          </button>
-        </div>
-      </form>
-    </section>
+      </section>
+    </main>
   </body>
 </html>

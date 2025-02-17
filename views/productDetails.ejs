@@ -1,12 +1,25 @@
-<article class="details-container">
-  <div class="heading">
-    <h3><%= product.name %></h3>
-    <p><%= product.category %></p>
-  </div>
-  <div class="product-details">
-    <p><%= product.quantity %> <%= product.unit %> left in stock</p>
-    <p>$<%= product.price %> per unit</p>
-    <p>$<%= product["total_stock_price"] %> total stock price</p>
-  </div>
-  <a href="/edit/products/<%= product.id %>">Edit Product</a>
-</article>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= product.name %></title>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <main>
+      <article class="details-container">
+        <div class="heading">
+          <h3><%= product.name %></h3>
+          <p><%= product.category %></p>
+        </div>
+        <div class="product-details">
+          <p><%= product.quantity %> <%= product.unit %> left in stock</p>
+          <p>$<%= product.price %> per unit</p>
+          <p>$<%= product["total_stock_price"] %> total stock price</p>
+        </div>
+        <a href="/edit/products/<%= product.id %>">Edit Product</a>
+      </article>
+    </main>
+  </body>
+</html>
