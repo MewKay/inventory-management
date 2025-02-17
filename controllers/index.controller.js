@@ -2,4 +2,8 @@ const viewGet = (req, res) => {
   res.render("view");
 };
 
-module.exports = { viewGet };
+const editGet = (req, res) => {
+  res.render("edit");
+};
+
+module.exports = { viewGet, editGet };

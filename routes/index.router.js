@@ -7,5 +7,6 @@ indexRouter.get("/", (req, res) => {
   res.render("index");
 });
 indexRouter.get("/view", controller.viewGet);
+indexRouter.get("/edit", controller.editGet);
 
 module.exports = indexRouter;

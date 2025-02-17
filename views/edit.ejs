@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grocery Inventory</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("partials/header.ejs") %>
+    <main>
+      <nav>
+        <a href="/edit/products/new">Add new product</a>
+        <a href="/edit/category">Manage Categories</a>
+        <div class="edit-product-container">
+          <button class="button-toggle-form" onclick="toggleForm(this)">
+            Edit a product
+          </button>
+          <form class="search-product hidden" action="/edit/" method="post">
+            <input
+              type="text"
+              name="name"
+              minlength="1"
+              maxlength="255"
+              required
+            />
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </main>
+    <script>
+      const toggleForm = (button) => {
+        const container = button.closest(".edit-product-container");
+        const form = container.querySelector(".search-product");
+
+        form.classList.toggle("hidden");
+      };
+    </script>
+  </body>
+</html>
