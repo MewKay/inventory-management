@@ -209,6 +209,21 @@ const addCategory = async function addCategoryToDB(categoryName) {
   return result;
 };
 
+const getFirstProductIdLikeName = async function queryProductIdLikeNameFromDB(
+  productName,
+) {
+  const query = `
+    SELECT id, name
+    FROM product
+    WHERE name ILIKE $1
+    ORDER BY name;
+  `;
+  const values = ["%" + productName + "%"];
+
+  const { rows } = await pool.query(query, values);
+  return rows;
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -223,4 +238,5 @@ module.exports = {
   updateCategory,
   deleteCategory,
   addCategory,
+  getFirstProductIdLikeName,
 };

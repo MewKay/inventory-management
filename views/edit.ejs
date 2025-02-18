@@ -17,11 +17,13 @@
         <a href="/edit/products/new">Add new product</a>
         <a href="/edit/category">Manage Categories</a>
         <div class="edit-product-container">
-          <ul class="error-messages">
-            <% errors.forEach((error) => { %>
-              <li><%= error.msg %></li>
-            <% }) %>
-          </ul>
+          <% if (locals.errors) { %>
+            <ul class="error-messages">
+              <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+              <% }) %>
+            </ul>
+          <% } %>
           <button class="button-toggle-form" onclick="toggleForm(this)">
             Edit a product
           </button>
@@ -31,12 +33,27 @@
               name="name"
               minlength="1"
               maxlength="255"
+              placeholder="Enter a product name…"
               required
             />
             <button type="submit">Search</button>
           </form>
         </div>
       </nav>
+      <% if (locals.matchingProducts) { %>
+       <div class="product-match">
+        <h4>Products matching you search :</h4>
+        <ul>
+          <% matchingProducts.forEach((product) => { %>
+            <li>
+              <a href="/edit/products/<%= product.id %>">
+                <%= product.name %>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+       </div>
+      <% } %>
     </main>
     <script>
       const toggleForm = (button) => {
