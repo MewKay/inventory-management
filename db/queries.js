@@ -224,6 +224,16 @@ const getFirstProductIdLikeName = async function queryProductIdLikeNameFromDB(
   return rows;
 };
 
+const getTotalStockValue = async function queryTotalStockValue() {
+  const query = `
+    SELECT SUM(quantity * price) AS value
+    FROM product;
+  `;
+
+  const { rows } = await pool.query(query);
+  return rows[0].value;
+};
+
 module.exports = {
   getAllProducts,
   getAllCategories,
@@ -239,4 +249,5 @@ module.exports = {
   deleteCategory,
   addCategory,
   getFirstProductIdLikeName,
+  getTotalStockValue,
 };
