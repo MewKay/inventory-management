@@ -1,0 +1,23 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--spacing-4) var(--spacing-7);
+  box-shadow: var(--shadow-1);
+  background-color: var(--grey-100);
+}
+
+header > nav {
+  display: flex;
+  gap: var(--spacing-7);
+}
+
+.nav-links {
+  font-size: var(--font-size-5);
+  color: var(--grey-600);
+  text-decoration: none;
+}
+
+.nav-links:hover {
+  color: var(--grey-800);
+}

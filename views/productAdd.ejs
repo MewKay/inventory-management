@@ -8,9 +8,7 @@
     <%- include("partials/header.ejs") %>
     <main>
       <section>
-        <header>
-          <h3>Add new product</h3>
-        </header>
+        <h3>Add new product</h3>
         <form action="/edit/products/new" method="post">
           <%- include("partials/productForm.ejs", { product, categories, errors }) %>
           <a href="/edit">Return</a>

@@ -8,7 +8,7 @@
     <%- include("partials/header.ejs") %>
     <main>
       <section>
-        <header>
+        <div>
           <h3>Edit Product</h3>
   
           <form action="<%= product.id %>/delete" method="post">
@@ -19,7 +19,7 @@
               Delete
             </button>
           </form>
-        </header>
+        </div>
         
         <form action="/edit/products/<%= product.id %>" method="post">
           <%- include("partials/productForm.ejs", { product, categories, errors }) %>
