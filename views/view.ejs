@@ -2,14 +2,17 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs") %>
+    <link rel="stylesheet" href="/styles/view.css" />
     <title>Grocery Inventory</title>
   </head>
   <body>
     <%- include("partials/header.ejs") %>
     <main>
-      <nav>
-        <a href="/view/products">View all products</a>
-        <a href="/view/category/1">View products by category</a>
+      <nav class="view-nav">
+        <a class="view-link" href="/view/products">View all products</a>
+        <a class="view-link" href="/view/category/1"
+          >View products by category</a
+        >
       </nav>
     </main>
   </body>

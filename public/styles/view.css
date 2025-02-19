@@ -1,0 +1,29 @@
+main {
+  justify-content: start;
+  padding-top: var(--spacing-8);
+  padding-left: var(--spacing-10);
+}
+
+.view-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.view-link {
+  padding: var(--spacing-4) var(--spacing-6);
+  padding-right: var(--spacing-8);
+  background-color: var(--grey-100);
+  color: var(--grey-600);
+  box-shadow: var(--shadow-2);
+  border-radius: var(--radius-medium);
+  text-decoration: none;
+  font-size: var(--font-size-7);
+  transition: all 0.3s ease;
+}
+
+.view-link:hover {
+  transform: translateY(-5%);
+  color: var(--grey-800);
+  box-shadow: var(--shadow-3);
+}
