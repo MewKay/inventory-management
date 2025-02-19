@@ -2,35 +2,40 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs") %>
+    <link rel="stylesheet" href="/styles/index.css" />
     <title>Grocery Inventory</title>
   </head>
   <body>
     <%- include("partials/header.ejs") %>
     <main>
-      <h2>Welcome !</h2>
-      <section class="invent-summary">
-        <h3>Inventory Summary</h3>
-        <div class="summary-card">
-          <p>Total Products</p>
-          <p><%= totalProductsCount %></p>
-        </div>
-        <div class="summary-card">
-          <p>Total Categories</p>
-          <p><%= totalCategoriesCount %></p>
-        </div>
-        <div class="summary-card">
-          <p>Total Stock Value</p>
-          <p><%= totalStockValue %></p>
-        </div>
-      </section>
-      <section>
-        <h3>Category Breakdown</h3>
-        <ul>
-          <% categories.forEach((category) => { %>
-            <li><%= category.name %> : <%= category.products_count %> products</li>
-          <% }) %>
-        </ul>
-      </section>
+      <div class="main-content">
+        <h2>Welcome !</h2>
+        <section class="invent-summary">
+          <h3>Inventory Summary</h3>
+          <div class="cards-container">
+            <div class="summary-card">
+              <p class="heading">Total Products</p>
+              <p class="numbers"><%= totalProductsCount %></p>
+            </div>
+            <div class="summary-card">
+              <p class="heading">Total Categories</p>
+              <p class="numbers"><%= totalCategoriesCount %></p>
+            </div>
+            <div class="summary-card">
+              <p class="heading">Total Stock Value</p>
+              <p class="numbers">$<%= totalStockValue %></p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3>Category Breakdown</h3>
+          <ul>
+            <% categories.forEach((category) => { %>
+              <li><span><%= category.name %> :</span> <%= category.products_count %> product<% if (category.products_count > 1) { %>s<% } %></li>
+            <% }) %>
+          </ul>
+        </section>
+      </div>
     </main>
   </body>
 </html>

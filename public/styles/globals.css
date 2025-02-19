@@ -63,4 +63,11 @@ body {
   width: 100%;
   background-color: var(--grey-300);
   color: var(--grey-900);
+  font-weight: var(--font-weight-normal);
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: var(--spacing-5) 0;
 }
