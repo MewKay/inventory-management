@@ -38,6 +38,10 @@ section {
   border: none;
 }
 
+.heading button {
+  background-color: var(--accent-1-500);
+}
+
 .action-container a {
   color: var(--grey-900);
   background-color: var(--grey-100);
