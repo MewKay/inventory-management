@@ -1,3 +1,11 @@
+section {
+  background-color: var(--grey-100);
+  padding: var(--spacing-6) var(--spacing-8);
+  border-radius: var(--radius-large);
+  box-shadow: var(--shadow-5);
+  box-shadow: var(--shadow-5);
+}
+
 .product-form {
   display: flex;
   flex-direction: column;
@@ -31,4 +39,28 @@ select {
 input.error,
 select.error {
   border: solid 1px var(--accent-1-500);
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-4);
+}
+
+.action {
+  padding: var(--spacing-1) var(--spacing-3);
+  background-color: var(--grey-800);
+  color: var(--grey-100);
+  border: none;
+  border-radius: var(--radius-small);
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-1);
+  text-decoration: none;
+  border: none;
+}
+
+a.action {
+  color: var(--grey-900);
+  background-color: var(--grey-100);
 }

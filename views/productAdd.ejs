@@ -2,17 +2,21 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs") %>
+    <link rel="stylesheet" href="/styles/productForm.css">
+    <link rel="stylesheet" href="/styles/productAdd.css">
     <title><%= title %></title>
   </head>
   <body>
     <%- include("partials/header.ejs") %>
     <main>
       <section>
-        <h3>Add new product</h3>
-        <form action="/edit/products/new" method="post">
+        <h3 class="heading">Add new product</h3>
+        <form action="/edit/products/new" method="post" class="product-form">
           <%- include("partials/productForm.ejs", { product, categories, errors }) %>
-          <a href="/edit">Return</a>
-          <button type="submit">Save</button>
+          <div class="action-container">
+            <a href="/edit" class="action">Return</a>
+            <button type="submit" class="action">Save</button>
+          </div>
         </form>
       </section>
     </main>
