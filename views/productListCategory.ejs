@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs") %>
+    <link rel="stylesheet" href="/styles/productTable.css">
+    <link rel="stylesheet" href="/styles/productListCategory.css">
     <title>Grocery Inventory</title>
   </head>
   <body>
@@ -9,22 +11,25 @@
     <main>
       <div class="category-list-container">
         <div class="category-select">
-          Show category :
-          <ul>
+          <p>Show category :</p>
+          <div class="select-container">
             <button
               class="select-expand"
+              onclick="toggleSelect(this)"
               aria-label="Select products' category to display"
             >
               <%= currentCategoryName %> 
             </button>
+            <ul class="select-list hidden">
             <% categories.forEach((category) => { %>
-              <li>
-                <a href="<%= category.id %>">
-                  <%= category.name %>
-                </a>
-              </li>
-            <% }) %>
-          </ul>
+                <li>
+                  <a href="<%= category.id %>">
+                    <%= category.name %>
+                  </a>
+                </li>
+                <% }) %>
+            </ul>
+          </div>
         </div>
         <%- include("partials/productTable.ejs", { 
           products, 
@@ -36,5 +41,6 @@
         }) %>
       </div>
     </main>
+    <script src="/scripts/productListCategory.js"></script>
   </body>
 </html>
