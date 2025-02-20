@@ -7,7 +7,7 @@
     </ul>
   <% } %>
 
-  <label for="product-name">Name :</label>
+  <label for="product-name">Name</label>
   <input
     type="text"
     name="name"
@@ -27,7 +27,7 @@
     </ul>
   <% } %>
 
-  <label for="product-category">Category :</label>
+  <label for="product-category">Category</label>
   <select name="category_id" id="product-category">
     <option value="">Uncategorized</option>
     <% categories.forEach((category) => { %>
@@ -58,25 +58,27 @@
     </ul>
   <% } %>
 
-  <label for="product-quantity">Quantity :</label>
-  <input
-    type="number"
-    name="quantity"
-    id="product-quantity"
-    min="0"
-    required
-    value="<%= product.quantity %>"
-  />
-  <input
-    type="text"
-    name="unit"
-    id="product-unit"
-    maxlength="50"
-    placeholder="Quantity unit"
-    required
-    value="<%= product.unit %>"
-  />
-</div>
+  <label for="product-quantity">Quantity</label>
+    <div class="quantity-unity-container">
+      <input
+        type="number"
+        name="quantity"
+        id="product-quantity"
+        min="0"
+        required
+        value="<%= product.quantity %>"
+      />
+      <input
+        type="text"
+        name="unit"
+        id="product-unit"
+        maxlength="50"
+        placeholder="Quantity unit"
+        required
+        value="<%= product.unit %>"
+      />
+    </div>
+  </div>
 
 <div>
   <% if (errors.price) { %>
@@ -87,7 +89,7 @@
     </ul>
   <% } %>
 
-  <label for="product-price">Price (per unit):</label>
+  <label for="product-price">Price (per unit)</label>
   <input
     type="number"
     name="price"

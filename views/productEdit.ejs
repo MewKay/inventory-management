@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs") %>
+    <link rel="stylesheet" href="/styles/productEdit.css">
     <title><%= title %></title>
   </head>
   <body>
     <%- include("partials/header.ejs") %>
     <main>
       <section>
-        <div>
+        <div class="heading">
           <h3>Edit Product</h3>
   
           <form action="<%= product.id %>/delete" method="post">
@@ -21,10 +22,10 @@
           </form>
         </div>
         
-        <form action="/edit/products/<%= product.id %>" method="post">
+        <form action="/edit/products/<%= product.id %>" method="post" class="product-form">
           <%- include("partials/productForm.ejs", { product, categories, errors }) %>
-          <div>
-            <a href="/view/products/<%= product.id %>">Return</a>
+          <div class="action-container">
+            <a href="/view/products/<%= product.id %>">Return to product details</a>
             <button type="submit">
               Save
             </button>
