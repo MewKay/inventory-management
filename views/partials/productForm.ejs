@@ -12,7 +12,7 @@
     type="text"
     name="name"
     id="product-name"
-    maxlength="255"
+    maxlength="50"
     required
     value="<%= product.name %>"
     <% if (errors.name) { %>
@@ -84,7 +84,7 @@
         type="text"
         name="unit"
         id="product-unit"
-        maxlength="50"
+        maxlength="15"
         placeholder="Quantity unit"
         required
         value="<%= product.unit %>"

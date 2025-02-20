@@ -1,6 +1,11 @@
 const { ExpressValidator } = require("express-validator");
 const { getAllCategories } = require("../../db/queries");
 const ValidationError = require("../../errors/ValidationError");
+const defaultLocale = require("../../utils/constants/defaultLocale");
+const {
+  productName: validSymbols,
+} = require("../../utils/constants/validSymbols");
+const ranges = require("../../utils/constants/inputRanges");
 
 const { body } = new ExpressValidator(
   {
@@ -22,14 +27,16 @@ const { body } = new ExpressValidator(
   },
 );
 
-const defaultLocale = "en-US";
-const validSymbols = " .,-'()&/+:;";
+const { min: minName, max: maxName } = ranges.product.name;
+const { min: minUnit, max: maxUnit } = ranges.product.unit;
 
 const productFormValidator = [
   body("name")
     .trim()
-    .isLength({ min: 1, max: 255 })
-    .withMessage("Name is required to be between 1 and 255 characters.")
+    .isLength({ min: minName, max: maxName })
+    .withMessage(
+      `Name is required to be between ${minName} and ${maxName} characters.`,
+    )
     .isAlphanumeric(defaultLocale, { ignore: validSymbols })
     .withMessage("Name have to be alphanumeric."),
 
@@ -51,8 +58,10 @@ const productFormValidator = [
 
   body("unit")
     .trim()
-    .isLength({ min: 1, max: 50 })
-    .withMessage("Unit is required to be between 1 and 50 characters.")
+    .isLength({ min: minUnit, max: maxUnit })
+    .withMessage(
+      `Unit is required to be between ${minUnit} and ${maxUnit} characters.`,
+    )
     .isAlpha()
     .withMessage("Unit must only contains characters."),
 

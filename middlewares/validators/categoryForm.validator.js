@@ -1,6 +1,11 @@
 const { ExpressValidator } = require("express-validator");
 const { getAllCategories } = require("../../db/queries");
 const ValidationError = require("../../errors/ValidationError");
+const ranges = require("../../utils/constants/inputRanges");
+const defaultLocale = require("../../utils/constants/defaultLocale");
+const {
+  categoryName: validSymbols,
+} = require("../../utils/constants/validSymbols");
 
 const { body } = new ExpressValidator({
   isNotInCategories: async (value) => {
@@ -14,13 +19,12 @@ const { body } = new ExpressValidator({
   },
 });
 
-const defaultLocale = "en-US";
-const validSymbols = " .-&";
+const { min, max } = ranges.category.name;
 
 const categoryFormValidator = body("name")
   .trim()
-  .isLength({ min: 1, max: 255 })
-  .withMessage("Category name is required to be between 1 and 255")
+  .isLength({ min, max })
+  .withMessage(`Category name is required to be between ${min} and ${max}`)
   .isAlpha(defaultLocale, { ignore: validSymbols })
   .withMessage(
     `Category name should only contains letters. Valid symbols are : ${validSymbols}`,

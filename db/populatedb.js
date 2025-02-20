@@ -4,14 +4,14 @@ const { Client } = require("pg");
 const query = `
   CREATE TABLE IF NOT EXISTS category(
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255) NOT NULL
+    name VARCHAR(20) NOT NULL
   );
 
   CREATE TABLE IF NOT EXISTS product(
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     quantity INTEGER NOT NULL,
-    unit VARCHAR(50) NOT NULL,
+    unit VARCHAR(15) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     category_id INTEGER REFERENCES category(id) ON DELETE SET NULL
   );
