@@ -15,10 +15,12 @@
           <%- include("partials/productForm.ejs", { product, categories, errors }) %>
           <div class="action-container">
             <a href="/edit" class="action">Return</a>
-            <button type="submit" class="action">Save</button>
+            <button type="button" class="action" onclick="openModal()">Save</button>
           </div>
+          <%- include("partials/passwordModal.ejs") %>
         </form>
       </section>
     </main>
+    <script src="/scripts/passwordModal.js"></script>
   </body>
 </html>
