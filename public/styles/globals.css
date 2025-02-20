@@ -46,6 +46,16 @@
 
   --accent-1-500: hsl(0, 82%, 39%);
 
+  --accent-2-100: hsl(62, 95%, 81%);
+  --accent-2-200: hsl(62, 90%, 71%);
+  --accent-2-300: hsl(60, 85%, 65%);
+  --accent-2-400: hsl(60, 75%, 51%);
+  --accent-2-500: hsl(55, 90%, 55%);
+  --accent-2-600: hsl(52, 75%, 51%);
+  --accent-2-700: hsl(50, 85%, 41%);
+  --accent-2-800: hsl(45, 80%, 32%);
+  --accent-2-900: hsl(40, 95%, 10%);
+
   /* Shadows */
   --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.2);
   --shadow-2: 0 4px 8px rgba(0, 0, 0, 0.2);
