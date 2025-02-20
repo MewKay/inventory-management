@@ -22,7 +22,6 @@ const categoryEditGet = asyncHandler(async (req, res) => {
   res.render("categoryEdit", {
     title: "Manage Categories",
     categories: categories,
-    errors: [], // Pass in no-error array to avoid ReferenceError
   });
 });
 
