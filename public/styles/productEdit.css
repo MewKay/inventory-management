@@ -17,31 +17,6 @@ section {
   font-size: var(--font-size-6);
 }
 
-.product-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-4);
-}
-
-.product-form > div:not(:last-of-type) {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
-}
-
-.product-form input,
-select {
-  padding: var(--spacing-2) var(--spacing-3);
-  border: none;
-  border-radius: var(--radius-medium);
-  color: var(--grey-800);
-  background-color: var(--grey-200);
-}
-
-.quantity-unit-container {
-  display: flex;
-}
-
 .action-container {
   display: flex;
   align-items: center;
