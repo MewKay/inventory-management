@@ -2,11 +2,12 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs") %>
+    <link rel="stylesheet" href="/styles/error.css" />
     <title>Error</title>
   </head>
   <body>
-    <h3>Something went wrong.</h3>
+    <h2>Something went wrong.</h3>
     <p><%= errorMessage %></p>
-    <a href="/">Go to Home</a>
+    <a href="/">Return to Homepage</a>
   </body>
 </html>
