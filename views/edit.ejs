@@ -2,19 +2,15 @@
 <html lang="en">
   <head>
     <%- include("partials/head.ejs") %>
+    <link rel="stylesheet" href="/styles/edit.css">
     <title>Grocery Inventory</title>
-    <style>
-      .hidden {
-        display: none;
-      }
-    </style>
   </head>
   <body>
     <%- include("partials/header.ejs") %>
     <main>
-      <nav>
-        <a href="/edit/products/new">Add new product</a>
-        <a href="/edit/category">Manage Categories</a>
+      <nav class="edit-nav">
+        <a class="edit-link" href="/edit/category">Manage Categories</a>
+        <a class="edit-link" href="/edit/products/new">Add new product</a>
         <div class="edit-product-container">
           <% if (locals.errors) { %>
             <ul class="error-messages">
@@ -23,7 +19,7 @@
               <% }) %>
             </ul>
           <% } %>
-          <button class="button-toggle-form" onclick="toggleForm(this)">
+          <button class="button-toggle-form edit-link" onclick="toggleForm(this)">
             Edit a product
           </button>
           <form class="search-product hidden" action="/edit" method="post">
@@ -54,13 +50,6 @@
        </div>
       <% } %>
     </main>
-    <script>
-      const toggleForm = (button) => {
-        const container = button.closest(".edit-product-container");
-        const form = container.querySelector(".search-product");
-
-        form.classList.toggle("hidden");
-      };
-    </script>
+    <script src="/scripts/edit.js"></script>
   </body>
 </html>

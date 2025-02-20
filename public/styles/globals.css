@@ -71,3 +71,7 @@ main {
   justify-content: center;
   padding: var(--spacing-5) 0;
 }
+
+button:hover {
+  cursor: pointer;
+}
