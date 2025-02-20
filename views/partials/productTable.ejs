@@ -1,13 +1,10 @@
 <div class="table-container">
   <table>
-    <caption>
-      Products List
-    </caption>
     <thead>
       <tr>
         <th>
           <a href="?sort=name&direction=<%= nameDirection ? nameDirection : "asc" %>">
-            Name
+            NAME
             <%= 
               nameDirection === "asc" 
                 ? "⬇" : nameDirection === "desc" 
@@ -17,7 +14,7 @@
         </th>
         <th>
           <a href="?sort=quantity&direction=<%= quantityDirection ? quantityDirection : "asc" %>">
-            Quantity
+            QUANTITY
             <%= 
              quantityDirection === "asc" 
                 ? "⬇" : quantityDirection === "desc" 
@@ -27,7 +24,7 @@
         </th>
         <th>
           <a href="?sort=price&direction=<%= priceDirection ? priceDirection : "asc" %>">
-            Price(per unit)
+            PRICE (PER UNIT)
             <%= 
               priceDirection === "asc" 
                 ? "⬇" : priceDirection === "desc" 
@@ -37,7 +34,7 @@
         </th>
         <th>
           <a href="?sort=category&direction=<%= categoryDirection ? categoryDirection : "asc" %>">
-            Category
+            CATEGORY
             <%= 
               categoryDirection === "asc" 
                 ? "⬇" : categoryDirection === "desc" 
@@ -45,7 +42,7 @@
             %>
           </a>
         </th>
-        <th>Details</th>
+        <th>DETAILS</th>
       </tr>
     </thead>
     <tbody>
@@ -62,7 +59,7 @@
   </table>
   <div class="pagination-container">
     <div class="count-pages">
-      Page <%= pagination.currentPage %> of <%= pagination.totalPages %>
+      Page <span><%= pagination.currentPage %></span> of <span><%= pagination.totalPages %></span>
     </div>
     <div class="page-navigation">
       <% if (pagination.hasPreviousPage) { %>
