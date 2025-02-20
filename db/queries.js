@@ -226,7 +226,11 @@ const getFirstProductIdLikeName = async function queryProductIdLikeNameFromDB(
 
 const getTotalStockValue = async function queryTotalStockValue() {
   const query = `
-    SELECT SUM(quantity * price) AS value
+    SELECT COALESCE(
+      SUM(quantity * price),
+      0
+    ) 
+    AS value
     FROM product;
   `;
 
