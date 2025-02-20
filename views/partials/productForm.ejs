@@ -15,6 +15,9 @@
     maxlength="255"
     required
     value="<%= product.name %>"
+    <% if (errors.name) { %>
+      class="error"
+    <% } %> 
   />
 </div>
 
@@ -28,7 +31,13 @@
   <% } %>
 
   <label for="product-category">Category</label>
-  <select name="category_id" id="product-category">
+  <select 
+    name="category_id" 
+    id="product-category" 
+    <% if (errors.category_id) { %>
+      class="error"
+    <% } %> 
+  >
     <option value="">Uncategorized</option>
     <% categories.forEach((category) => { %>
       <option value="<%= category.id %>"
@@ -67,6 +76,9 @@
         min="0"
         required
         value="<%= product.quantity %>"
+        <% if (errors.quantity) { %>
+          class="error"
+        <% } %> 
       />
       <input
         type="text"
@@ -76,6 +88,9 @@
         placeholder="Quantity unit"
         required
         value="<%= product.unit %>"
+        <% if (errors.unit) { %>
+          class="error"
+        <% } %> 
       />
     </div>
   </div>
@@ -99,5 +114,8 @@
     placeholder="0.00"
     required
     value="<%= product.price %>"
+    <% if (errors.price) { %>
+      class="error"
+    <% } %> 
   />
 </div>

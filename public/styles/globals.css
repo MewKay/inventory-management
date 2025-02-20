@@ -44,6 +44,8 @@
   --grey-800: hsl(206, 42%, 19%);
   --grey-900: hsl(210, 54%, 8%);
 
+  --accent-1-500: hsl(0, 82%, 39%);
+
   /* Shadows */
   --shadow-1: 0 2px 4px rgba(0, 0, 0, 0.2);
   --shadow-2: 0 4px 8px rgba(0, 0, 0, 0.2);
