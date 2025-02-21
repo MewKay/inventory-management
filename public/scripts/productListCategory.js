@@ -1,7 +1,18 @@
-/* eslint-disable no-unused-vars */
-const toggleSelect = (button) => {
-  const container = button.closest(".select-container");
-  const selectList = container.querySelectorAll(".select-list");
+/* eslint-disable no-undef */
+const container = document.querySelector(".select-container");
+const selectList = container.querySelector(".select-list");
+const expandButton = container.querySelector(".select-expand");
 
-  selectList.forEach((element) => element.classList.toggle("hidden"));
-};
+const toggleHidden = () => selectList.classList.toggle("hidden");
+
+expandButton.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleHidden();
+});
+selectList.addEventListener("click", (e) => e.stopPropagation());
+document.addEventListener("click", () => {
+  if (selectList.classList.contains("hidden")) {
+    return;
+  }
+  toggleHidden();
+});
