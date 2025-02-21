@@ -11,6 +11,7 @@ const productUpdateValidationHandler = require("../middlewares/validators/produc
 const paramValidationHandler = require("../middlewares/validators/param.validationHandler");
 const asyncHandler = require("express-async-handler");
 const NotFoundError = require("../errors/NotFoundError");
+const authAdmin = require("../middlewares/authAdmin");
 
 const productEditGet = [
   productParamValidator,
@@ -36,6 +37,7 @@ const productEditGet = [
 ];
 
 const productEditUpdate = [
+  authAdmin,
   productParamValidator,
   paramValidationHandler,
   productFormValidator,
@@ -55,6 +57,7 @@ const productEditUpdate = [
 ];
 
 const productEditDelete = [
+  authAdmin,
   productParamValidator,
   paramValidationHandler,
   asyncHandler(async (req, res) => {

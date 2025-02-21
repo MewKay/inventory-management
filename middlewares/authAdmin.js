@@ -1,10 +1,11 @@
+const ValidationError = require("../errors/ValidationError");
 require("dotenv").config();
 
 const authAdmin = (req, res, next) => {
   const { password } = req.body;
 
-  if (password === process.env.ADMIN_PASSWORD) {
-    throw new Error("The password provided is invalid.");
+  if (!password || password !== process.env.ADMIN_PASSWORD) {
+    throw new ValidationError("The password provided is invalid.");
   }
 
   next();

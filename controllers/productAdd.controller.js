@@ -4,6 +4,7 @@ const emptyProductFields = require("../utils/constants/emptyProductFields");
 const productFormValidator = require("../middlewares/validators/productForm.validator");
 const productAddValidationHandler = require("../middlewares/validators/productAdd.validationHandler");
 const asyncHandler = require("express-async-handler");
+const authAdmin = require("../middlewares/authAdmin");
 
 const productAddGet = [
   asyncHandler(async (req, res) => {
@@ -19,6 +20,7 @@ const productAddGet = [
 ];
 
 const productAddNew = [
+  authAdmin,
   productFormValidator,
   productAddValidationHandler,
   asyncHandler(async (req, res) => {

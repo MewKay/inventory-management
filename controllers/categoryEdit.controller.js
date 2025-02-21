@@ -11,6 +11,7 @@ const paramValidationHandler = require("../middlewares/validators/param.validati
 const { matchedData } = require("express-validator");
 const categoryFormValidator = require("../middlewares/validators/categoryForm.validator");
 const categoryFormValidationHandler = require("../middlewares/validators/categoryForm.validationHandler");
+const authAdmin = require("../middlewares/authAdmin");
 
 const categoryEditGet = asyncHandler(async (req, res) => {
   const categories = await getAllCategoriesWithProductCount();
@@ -26,6 +27,7 @@ const categoryEditGet = asyncHandler(async (req, res) => {
 });
 
 const categoryEditUpdate = [
+  authAdmin,
   categoryParamValidator,
   paramValidationHandler,
   categoryFormValidator,
@@ -44,6 +46,7 @@ const categoryEditUpdate = [
 ];
 
 const categoryEditDelete = [
+  authAdmin,
   categoryParamValidator,
   paramValidationHandler,
   asyncHandler(async (req, res) => {
@@ -60,6 +63,7 @@ const categoryEditDelete = [
 ];
 
 const categoryEditAdd = [
+  authAdmin,
   categoryFormValidator,
   categoryFormValidationHandler,
   asyncHandler(async (req, res) => {
